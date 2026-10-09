@@ -1,0 +1,198 @@
+/* ============================================================
+   URHOM — header dropdowns + site-wide search overlay
+   Loaded on every page. Scoped to the two header shells that exist
+   (the home nav pill and the collection-page header bar), so it does
+   not reach anything else.
+   ============================================================ */
+
+/* .u-sr-only lives in page-furnishing.css, which the home page does not
+   load — without it the overlay's label rendered as visible text */
+.u-sr-only{
+  position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+  overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
+}
+
+/* ============================================================
+   CATEGORY DROPDOWNS
+   ============================================================ */
+
+.navitem{ position:relative; }
+.navitem.has-drop{ display:flex; align-items:center; gap:2px; }
+
+.navitem__toggle{
+  display:grid; place-items:center;
+  width:16px; height:16px; padding:0;
+  color:inherit; opacity:.6;
+  transition:opacity var(--t-fast) var(--ease-out), transform var(--t-med) var(--ease-soft);
+}
+.navitem__toggle:hover{ opacity:1; }
+.navitem.is-open .navitem__toggle{ opacity:1; transform:rotate(180deg); }
+.navitem__caret{ width:13px; height:13px; }
+.navitem__toggle:focus-visible{ outline:2px solid currentColor; outline-offset:2px; border-radius:4px; }
+
+.navdrop{
+  --shift: 0px;
+  position:absolute; top:calc(100% + 10px);
+  left:0; transform:translateX(var(--shift));
+  z-index:90;
+  width:max-content; min-width:188px; max-width:min(260px,calc(100vw - 24px));
+  /* fourteen categories would otherwise run off the bottom of the window */
+  max-height:min(68vh,520px); overflow-y:auto; overscroll-behavior:contain;
+  padding:10px;
+  background:#fff;
+  border:1px solid #EFEBE3;
+  border-radius:14px;
+  box-shadow:0 18px 44px -26px rgba(34,27,14,.34);
+
+  /* 150–200ms, and the panel stays out of the hit-test while hidden */
+  opacity:0; transform:translateX(var(--shift)) translateY(-5px);
+  transition:opacity .17s var(--ease-out), transform .17s var(--ease-out);
+}
+.navitem.is-shown .navdrop{ opacity:1; transform:translateX(var(--shift)) translateY(0); }
+.navdrop[hidden]{ display:none; }
+
+/* an invisible bridge across the 10px gap, so crossing from the trigger to
+   the panel never fires mouseleave on the way */
+.navdrop::before{
+  content:""; position:absolute; left:0; right:0; top:-12px; height:12px;
+}
+
+/* one vertical stack — a multi-column panel reads as a strip across the
+   page, which is what this replaced */
+.navdrop__list{ display:block; }
+.navdrop__list a{
+  display:block; padding:6px 10px; border-radius:7px;
+  font-size:12.5px; font-weight:500; letter-spacing:-.01em; line-height:1.35;
+  color:#3C3B36; white-space:nowrap;
+  transition:color .15s var(--ease-out);
+}
+.navdrop__list a:hover{ background:#F8F5EF; color:var(--ink); }
+.navdrop__list a:focus-visible{
+  outline:2px solid var(--ink); outline-offset:-2px; background:#F8F5EF; color:var(--ink);
+}
+
+/* a quiet text link, not a second yellow button competing with the hero CTA */
+.navdrop__all{
+  display:flex; align-items:center; gap:6px;
+  margin-top:7px; padding:9px 11px 3px;
+  border-top:1px solid #F2EEE6;
+  font-size:12px; font-weight:600; letter-spacing:-.005em; color:var(--ink-mute);
+  transition:color .15s var(--ease-out);
+}
+.navdrop__all:hover{ color:var(--ink); }
+.navdrop__all:hover svg{ transform:translateX(2px); }
+.navdrop__all:focus-visible{ outline:2px solid var(--ink); outline-offset:2px; border-radius:6px; }
+.navdrop__all svg{ width:13px; height:13px; transition:transform .15s var(--ease-out); }
+
+/* --- inside the mobile drawer the panel is an inline accordion --- */
+.mobile-menu__list .navitem.has-drop{ display:flex; flex-wrap:wrap; align-items:center; }
+.mobile-menu__list .navitem.has-drop > a{ flex:1 1 auto; }
+.mobile-menu__list .navitem__toggle{
+  flex:0 0 auto; width:40px; height:40px; margin-left:auto; opacity:1; color:#55534D;
+}
+.mobile-menu__list .navitem__caret{ width:18px; height:18px; }
+/* the panel is a third flex child and must take its own row */
+.mobile-menu__list .navdrop{ flex:0 0 100%; }
+.mobile-menu__list .navdrop{
+  position:static; transform:none !important; width:100%; max-width:none;
+  margin:2px 0 8px; padding:6px;
+  border-radius:12px; box-shadow:none; border-color:#EFEBE3; background:#FAF8F4;
+}
+.mobile-menu__list .navitem.is-shown .navdrop{ transform:none; }
+.mobile-menu__list .navdrop{ max-height:none; overflow:visible; }
+.mobile-menu__list .navdrop__list{ display:grid; grid-template-columns:1fr 1fr; }
+.mobile-menu__list .navdrop__list a{ white-space:normal; }
+
+@media (prefers-reduced-motion: reduce){
+  .navdrop{ transition:none; }
+}
+
+/* ============================================================
+   SEARCH OVERLAY
+   ============================================================ */
+
+.is-search-open{ overflow:hidden; }
+
+.ssearch{ position:fixed; inset:0; z-index:200; }
+.ssearch[hidden]{ display:none; }
+.ssearch__scrim{
+  position:absolute; inset:0;
+  background:rgba(28,24,16,.46);
+  -webkit-backdrop-filter:blur(3px); backdrop-filter:blur(3px);
+}
+.ssearch__panel{
+  position:relative;
+  width:min(640px,calc(100vw - 28px));
+  margin:clamp(56px,10vh,110px) auto 0;
+  background:#fff;
+  border-radius:18px;
+  box-shadow:0 40px 90px -36px rgba(30,24,12,.6);
+  overflow:hidden;
+}
+
+.ssearch__bar{
+  display:flex; align-items:center; gap:10px;
+  padding:14px 14px 14px 18px;
+  border-bottom:1px solid #F0ECE4;
+}
+.ssearch__bar > svg{ flex:0 0 auto; width:19px; height:19px; color:#8A8780; }
+.ssearch__bar input{
+  flex:1 1 auto; min-width:0; height:30px;
+  font:inherit; font-size:16px; font-weight:500; color:var(--ink);
+  background:none; border:0;
+}
+.ssearch__bar input:focus{ outline:none; }
+/* the UA's own clear button duplicates the close control beside it */
+.ssearch__bar input::-webkit-search-cancel-button{ -webkit-appearance:none; appearance:none; }
+.ssearch__bar input::placeholder{ color:#A5A29B; font-weight:400; }
+.ssearch__x{
+  flex:0 0 auto; display:grid; place-items:center; width:30px; height:30px;
+  border-radius:50%; color:var(--ink-mute);
+  transition:background var(--t-fast) var(--ease-out), color var(--t-fast) var(--ease-out);
+}
+.ssearch__x:hover{ background:#F4F1EB; color:var(--ink); }
+.ssearch__x svg{ width:15px; height:15px; }
+
+.ssearch__body{ max-height:min(58vh,520px); overflow-y:auto; padding:12px 12px 16px; }
+.ssearch__hint{
+  padding:4px 6px 8px;
+  font-size:11px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:#9A9792;
+}
+.ssearch__none{ padding:14px 6px 18px; font-size:13.5px; line-height:1.55; color:var(--ink-soft); }
+.ssearch__none b{ color:var(--ink); }
+
+.ssearch__tags{ display:flex; flex-wrap:wrap; gap:7px; padding:0 6px; }
+.ssearch__tag{
+  padding:6px 12px; border-radius:999px;
+  background:#F6F3EE; border:1px solid #E9E4DA; color:var(--ink);
+  font-size:12.5px; font-weight:600;
+  transition:background var(--t-fast) var(--ease-out), border-color var(--t-fast) var(--ease-out);
+}
+.ssearch__tag:hover{ background:var(--yellow); border-color:var(--yellow); }
+
+.sres{
+  display:flex; align-items:center; gap:11px;
+  padding:8px 10px; border-radius:11px;
+  transition:background var(--t-fast) var(--ease-out);
+}
+.sres:hover, .sres:focus-visible{ background:#F7F4EE; outline:none; }
+.sres__img{ flex:0 0 auto; width:56px; height:38px; object-fit:cover; border-radius:8px; background:#F2EEE7; }
+.sres__text{ flex:1 1 auto; min-width:0; }
+.sres__name{
+  display:block; font-size:13.5px; font-weight:600; letter-spacing:-.012em; color:var(--ink);
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.sres__meta{
+  display:block; margin-top:1px; font-size:11.5px; color:#86837C;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.sres__right{
+  flex:0 0 auto; font-size:12px; font-weight:700; letter-spacing:-.01em; color:var(--ink-soft);
+}
+
+@media (max-width:560px){
+  .navdrop__list{ grid-template-columns:1fr; }
+  .navdrop--wide .navdrop__list{ grid-template-columns:1fr 1fr; }
+  .ssearch__panel{ margin-top:14px; }
+  .ssearch__bar input{ font-size:16px; }   /* anything smaller zooms on iOS */
+}

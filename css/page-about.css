@@ -1,0 +1,376 @@
+/* ============================================================
+   URHOM — About page
+   Builds on css/page-furnishing.css for the header/footer shell.
+   Warm white and cream grounds, near-black type, the one existing
+   yellow used only on punctuation, CTAs and a single rule.
+   ============================================================ */
+
+body.about-page{ background:#FDFBF8; }
+
+/* reduced motion is honoured: the anchor jump is instant instead */
+html{ scroll-behavior:smooth; }
+@media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+#story{ scroll-margin-top:clamp(70px,6vw,96px); }
+
+.ab-eyebrow{
+  font-size:clamp(10px,.72vw,11.5px); font-weight:700;
+  letter-spacing:.18em; text-transform:uppercase; color:#75736D;
+}
+.ab-eyebrow--light{ color:rgba(255,255,255,.82); }
+
+.ab-h2{
+  margin-top:clamp(8px,.7vw,14px);
+  font-size:clamp(25px,2.25vw,36px); font-weight:700; line-height:1.14;
+  letter-spacing:-.028em; color:var(--ink);
+}
+.ab-h2--sm{ font-size:clamp(23px,2.0vw,32px); }
+.ab-h2 em, .ab-hero__title em{ font-style:normal; color:var(--yellow); }
+
+.ab-ic{ width:22px; height:22px; color:#3C3B36; flex:0 0 auto; }
+
+
+/* ============================================================
+   1 · HERO
+   ============================================================ */
+
+.ab-hero{
+  position:relative; isolation:isolate; overflow:hidden;
+  min-height:clamp(330px,26vw,430px);
+  display:flex; flex-direction:column; justify-content:center;
+  background:#2A241C;
+}
+.ab-hero__media{ position:absolute; inset:0; z-index:-1; }
+.ab-hero__img{ width:100%; height:100%; object-fit:cover; object-position:62% 52%; }
+/* left-to-right only, so the photograph keeps its light on the right */
+.ab-hero__media::after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(94deg,
+    rgba(26,21,15,.88) 0%, rgba(26,21,15,.80) 22%,
+    rgba(26,21,15,.56) 38%, rgba(26,21,15,.18) 54%, rgba(26,21,15,0) 68%);
+}
+
+.ab-hero__inner{
+  position:relative;
+  padding:clamp(26px,3vw,52px) clamp(20px,4.4vw,68px) clamp(70px,6.4vw,104px);
+  max-width:min(62vw,720px);
+}
+.ab-hero__title{
+  margin-top:clamp(9px,.8vw,16px);
+  font-size:clamp(28px,3.0vw,46px); font-weight:700; line-height:1.08;
+  letter-spacing:-.034em; color:#fff;
+}
+.ab-hero__lede{
+  margin-top:clamp(10px,.9vw,17px);
+  font-size:clamp(12.5px,.88vw,15px); line-height:1.62; color:rgba(255,255,255,.84);
+}
+.ab-hero__cta{ margin-top:clamp(14px,1.2vw,22px); }
+
+/* translucent strip along the foot of the photograph */
+.ab-caps{
+  position:absolute; left:0; right:0; bottom:0; z-index:1;
+  display:flex; align-items:center; flex-wrap:wrap;
+  gap:0 clamp(10px,1.6vw,30px);
+  padding:clamp(10px,.9vw,16px) clamp(20px,4.4vw,68px);
+  background:rgba(22,18,13,.46);
+  -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+  border-top:1px solid rgba(255,255,255,.1);
+}
+.ab-caps li{
+  display:flex; align-items:center; gap:9px;
+  padding-right:clamp(10px,1.6vw,30px);
+  border-right:1px solid rgba(255,255,255,.17);
+  font-size:clamp(10px,.72vw,12px); line-height:1.3; color:rgba(255,255,255,.78);
+}
+.ab-caps li:last-child{ border-right:0; padding-right:0; }
+.ab-caps .ab-ic{ color:rgba(255,255,255,.9); width:20px; height:20px; }
+.ab-caps b{ display:block; font-weight:700; color:#fff; }
+
+
+/* ============================================================
+   2 · STATISTICS
+   ============================================================ */
+
+.ab-stats{ background:#F7F4EF; padding:clamp(18px,1.8vw,30px) clamp(16px,2.08vw,34px); }
+.ab-stats__note{
+  max-width:1320px; margin:0 auto clamp(8px,.7vw,13px);
+  font-size:10.5px; letter-spacing:.04em; color:#A09B91;
+}
+.ab-stats__row{
+  display:grid; grid-template-columns:repeat(4,minmax(0,1fr));
+  max-width:1320px; margin:0 auto;
+}
+.ab-stat{
+  position:relative; display:flex; align-items:center; gap:clamp(10px,1.1vw,20px);
+  padding-inline:clamp(10px,1.8vw,34px);
+}
+.ab-stat + .ab-stat::before{
+  content:""; position:absolute; left:0; top:8%; bottom:8%;
+  width:1px; background:rgba(24,22,18,.13);
+}
+.ab-stat .ab-ic{ width:clamp(26px,2.1vw,34px); height:clamp(26px,2.1vw,34px); color:#2E2C27; }
+.ab-stat b{
+  display:block; font-size:clamp(20px,1.75vw,29px); font-weight:700;
+  letter-spacing:-.03em; color:var(--ink);
+}
+.ab-stat i{ display:block; margin-top:1px; font-style:normal; font-size:clamp(10.5px,.78vw,13px); color:#6B6A64; }
+
+
+/* ============================================================
+   3 · OUR STORY
+   ============================================================ */
+
+.ab-story{
+  display:grid;
+  grid-template-columns:minmax(0,1.08fr) minmax(0,1.12fr) minmax(0,.62fr);
+  gap:clamp(18px,2.4vw,44px);
+  align-items:start;
+  padding:0 clamp(16px,2.08vw,34px) clamp(34px,3.4vw,60px);
+  max-width:1460px; margin-inline:auto;
+}
+/* the photograph runs to the page edge on the left, as in the reference */
+.ab-story__shot{
+  position:relative; overflow:hidden;
+  margin-left:calc(-1 * clamp(16px,2.08vw,34px));
+  aspect-ratio:7 / 5; background:#EFEAE2;
+}
+.ab-story__img{
+  width:100%; height:100%; object-fit:cover; object-position:50% 56%;
+  transition:transform .5s var(--ease-soft);
+}
+.ab-story__shot:hover .ab-story__img{ transform:scale(1.03); }
+.ab-story__shot::after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(0deg, rgba(22,18,13,.72) 0%, rgba(22,18,13,.26) 38%, rgba(22,18,13,0) 62%);
+}
+.ab-story__over{
+  position:absolute; left:clamp(16px,2vw,34px); bottom:clamp(16px,1.8vw,30px); z-index:1;
+  font-size:clamp(21px,2.1vw,34px); font-weight:700; line-height:1.14;
+  letter-spacing:-.03em; color:#fff;
+}
+.ab-story__over em{ font-style:normal; color:var(--yellow); }
+
+.ab-story__copy{ padding-top:clamp(24px,2.6vw,48px); }
+.ab-story__copy p{
+  margin-top:clamp(10px,.9vw,16px);
+  font-size:clamp(12.5px,.88vw,14.5px); line-height:1.68; color:#55544E;
+}
+.ab-story__copy .ab-h2 + p{ margin-top:clamp(13px,1.1vw,20px); }
+
+.ab-story__aside{ padding-top:clamp(24px,2.6vw,48px); }
+.ab-story__still{ overflow:hidden; aspect-ratio:4 / 3.1; background:#EFEAE2; }
+.ab-story__still-img{ width:100%; height:100%; object-fit:cover; object-position:50% 42%; }
+
+.ab-quote{
+  margin-top:clamp(14px,1.3vw,24px);
+  padding-bottom:clamp(10px,.9vw,16px);
+  font-family:'Caveat', ui-rounded, cursive;
+  font-size:clamp(15px,1.15vw,19px); font-weight:500; line-height:1.5;
+  letter-spacing:.005em; color:#3C3B36;
+}
+.ab-quote::after{
+  content:""; display:block; width:58px; height:2px; margin-top:clamp(9px,.8vw,14px);
+  background:var(--yellow);
+}
+
+
+/* ============================================================
+   4 · PURPOSE / VISION / MISSION / VALUES
+   ============================================================ */
+
+.ab-purpose{
+  display:grid; grid-template-columns:minmax(0,.86fr) minmax(0,2fr);
+  gap:clamp(20px,2.8vw,52px); align-items:start;
+  padding:clamp(28px,3vw,54px) clamp(16px,2.08vw,34px) clamp(34px,3.4vw,60px);
+  max-width:1460px; margin-inline:auto;
+}
+.ab-purpose__copy p{
+  margin-top:clamp(12px,1.1vw,20px); max-width:38ch;
+  font-size:clamp(12.5px,.88vw,14.5px); line-height:1.68; color:#55544E;
+}
+
+.ab-cards{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(10px,1.1vw,20px); align-items:stretch; }
+.ab-card{
+  position:relative; display:flex; flex-direction:column;
+  background:#fff; border:1px solid #EDE8E0; border-radius:4px;
+  transition:transform .25s var(--ease-soft), box-shadow .25s var(--ease-soft);
+}
+.ab-card:hover{ transform:translateY(-3px); box-shadow:0 14px 32px -24px rgba(50,40,24,.5); }
+.ab-card__shot{ overflow:hidden; aspect-ratio:16 / 10; background:#EFEAE2; }
+.ab-card__img{
+  width:100%; height:100%; object-fit:cover;
+  transition:transform .45s var(--ease-soft);
+}
+.ab-card:hover .ab-card__img{ transform:scale(1.035); }
+/* the icon straddles the image's lower edge — it follows the shot in flow
+   and is pulled up over it, so no magic offsets are needed */
+.ab-card__ic{
+  position:relative; z-index:1;
+  display:grid; place-items:center; width:34px; height:34px;
+  margin:-17px 0 0 clamp(12px,1.1vw,18px); border-radius:50%;
+  background:#fff; border:1px solid #EDE8E0;
+  box-shadow:0 3px 10px -5px rgba(50,40,24,.4);
+}
+.ab-card__ic svg{ width:17px; height:17px; color:#2E2C27; }
+.ab-card h3{
+  margin:clamp(11px,.95vw,16px) clamp(13px,1.1vw,19px) 0;
+  font-size:clamp(13.5px,1vw,16px); font-weight:700; letter-spacing:-.016em; color:var(--ink);
+}
+.ab-card > p{
+  margin:6px clamp(13px,1.1vw,19px) clamp(15px,1.3vw,22px);
+  font-size:clamp(11.5px,.82vw,13.5px); line-height:1.6; color:#6B6A64;
+}
+.ab-card__list{
+  margin:7px clamp(13px,1.1vw,19px) clamp(15px,1.3vw,22px) calc(clamp(13px,1.1vw,19px) + 14px);
+  list-style:disc;
+}
+.ab-card__list li{
+  font-size:clamp(11.5px,.82vw,13.5px); line-height:1.6; color:#6B6A64;
+  padding-left:2px;
+}
+
+
+/* ============================================================
+   5 · THE URHOM DIFFERENCE
+   ============================================================ */
+
+.ab-diff{
+  background:#F4F0E9;
+  display:grid; grid-template-columns:minmax(0,.95fr) minmax(0,2.15fr);
+  gap:clamp(20px,2.8vw,52px); align-items:center;
+  padding:clamp(28px,2.8vw,50px) clamp(16px,2.08vw,34px);
+}
+.ab-diff__copy{ max-width:420px; }
+.ab-diff__copy p{
+  margin-top:clamp(9px,.8vw,15px);
+  font-size:clamp(12px,.86vw,14px); line-height:1.6; color:#55544E;
+}
+.ab-diff__copy .btn{ margin-top:clamp(13px,1.1vw,20px); }
+
+.ab-benefits{ display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); }
+.ab-benefits li{
+  position:relative; text-align:center;
+  padding-inline:clamp(8px,1vw,18px);
+}
+.ab-benefits li + li::before{
+  content:""; position:absolute; left:0; top:6%; bottom:6%;
+  width:1px; background:rgba(24,22,18,.12);
+}
+.ab-benefits .ab-ic{ width:25px; height:25px; margin:0 auto 9px; display:block; }
+.ab-benefits b{
+  display:block; font-size:clamp(11.5px,.82vw,13.5px); font-weight:700;
+  letter-spacing:-.014em; color:var(--ink);
+}
+.ab-benefits span{
+  display:block; margin-top:4px;
+  font-size:clamp(10px,.72vw,11.5px); line-height:1.45; color:#75736D;
+}
+
+
+/* ============================================================
+   6 · EXPERIENCE URHOM IN PERSON
+   ============================================================ */
+
+.ab-store{ display:grid; grid-template-columns:minmax(0,1.18fr) minmax(0,1fr); background:#FDFBF8; }
+.ab-store__shot{ overflow:hidden; aspect-ratio:16 / 10; background:#EFEAE2; }
+.ab-store__img{ width:100%; height:100%; object-fit:cover; object-position:50% 54%; }
+.ab-store__copy{
+  display:flex; flex-direction:column; justify-content:center;
+  padding:clamp(26px,3vw,56px) clamp(20px,3.2vw,56px);
+}
+.ab-store__copy > p{
+  margin-top:clamp(10px,.9vw,16px); max-width:42ch;
+  font-size:clamp(12.5px,.88vw,14.5px); line-height:1.65; color:#55544E;
+}
+.ab-store__copy .btn{ margin-top:clamp(14px,1.2vw,22px); align-self:flex-start; }
+.ab-store__feats{
+  display:grid; grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:clamp(8px,1vw,18px);
+  margin-top:clamp(22px,2.2vw,40px);
+  padding-top:clamp(16px,1.5vw,26px);
+  border-top:1px solid #EDE8E0;
+}
+.ab-store__feats li{ text-align:center; }
+.ab-store__feats .ab-ic{ width:21px; height:21px; margin:0 auto 7px; display:block; }
+.ab-store__feats span{ font-size:clamp(10px,.72vw,11.5px); line-height:1.35; color:#55544E; }
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width:1180px){
+  .ab-story{ grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); }
+  .ab-story__aside{ grid-column:1 / -1; display:grid; grid-template-columns:minmax(0,260px) 1fr;
+                    gap:clamp(14px,2vw,30px); align-items:center; padding-top:0; }
+  .ab-quote{ margin-top:0; }
+  .ab-purpose{ grid-template-columns:1fr; }
+  .ab-diff{ grid-template-columns:1fr; }
+  .ab-diff__copy{ max-width:none; }
+  .ab-benefits{ grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(16px,2vw,28px) 0; }
+  .ab-benefits li:nth-child(3n+1)::before{ display:none; }
+}
+
+@media (max-width:980px){
+  .ab-hero__inner{ max-width:none; padding-bottom:clamp(96px,16vw,130px); }
+  .ab-hero__lede br{ display:none; }
+  .ab-hero__media::after{
+    background:linear-gradient(170deg, rgba(22,18,13,.82) 0%, rgba(22,18,13,.68) 46%, rgba(22,18,13,.58) 100%);
+  }
+  .ab-store{ grid-template-columns:1fr; }       /* image first, then content */
+  .ab-story{ grid-template-columns:1fr; }
+  .ab-story__shot{ margin-right:calc(-1 * clamp(16px,2.08vw,34px)); aspect-ratio:16 / 9; }
+  .ab-story__copy, .ab-story__aside{ padding-top:0; }
+  .ab-cards{ grid-template-columns:1fr 1fr; }
+}
+
+@media (max-width:760px){
+  /* Two rows of capabilities no longer fit in the hero's reserved foot, and
+     were covering the CTA. Below this width the strip leaves the overlay and
+     sits under the photograph instead. */
+  .ab-hero{ display:block; min-height:0; }
+  .ab-hero__media{ position:absolute; inset:0 0 auto; height:clamp(300px,74vw,380px); }
+  .ab-hero__inner{ min-height:clamp(300px,74vw,380px); padding-bottom:clamp(20px,5vw,32px);
+                   display:flex; flex-direction:column; justify-content:center; max-width:none; }
+  .ab-caps{
+    position:static; background:#2A241C; border-top:0;
+    -webkit-backdrop-filter:none; backdrop-filter:none;
+    padding-block:clamp(12px,3vw,18px);
+  }
+
+  .ab-stats__row{ grid-template-columns:1fr 1fr; gap:16px 0; }
+  .ab-stat:nth-child(odd)::before{ display:none; }
+  .ab-caps{ gap:10px 0; }
+  .ab-caps li{ flex:0 0 50%; padding-right:10px; border-right:0; }
+  .ab-cards{ grid-template-columns:1fr; }
+  .ab-story__aside{ grid-template-columns:1fr; }
+  .ab-benefits{ grid-template-columns:1fr 1fr; }
+  .ab-benefits li:nth-child(odd)::before{ display:none; }
+  .ab-benefits li:nth-child(3n+1)::before{ content:""; }
+  .ab-benefits li:nth-child(2n+1)::before{ display:none; }
+  .ab-store__feats{ grid-template-columns:1fr 1fr; gap:16px 10px; }
+}
+
+@media (max-width:420px){
+  .ab-hero__title{ font-size:26px; }
+  .ab-caps li{ flex:0 0 100%; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .ab-card, .ab-card__img, .ab-story__img{ transition:none !important; }
+  .ab-card:hover{ transform:none; }
+  .ab-card:hover .ab-card__img, .ab-story__shot:hover .ab-story__img{ transform:none; }
+}
+
+
+/* On a phone the smallest labels bottomed out at 10px, which is below a
+   comfortable reading size — the extra room is there, so use it. */
+@media (max-width:1080px){
+  .ab-caps li,
+  .ab-benefits span,
+  .ab-store__feats span,
+  .ab-card > p,
+  .ab-card__list li{ font-size:12px; line-height:1.5; }
+  .ab-eyebrow{ font-size:11px; }
+  .ab-stat i{ font-size:12px; }
+  .ab-stats__note{ font-size:11px; }
+}

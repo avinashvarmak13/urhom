@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Furniture Collection | URHOM</title>
+<meta name="description" content="Explore URHOM's wide range of premium furniture crafted for comfort, style and modern living — sofas, beds, dining sets, chairs, recliners, wardrobes, TV units and storage.">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/webp" href="assets/logo-mark.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" type="image/webp" fetchpriority="high"
+      imagesrcset="assets/furniture/hero-living-sm.webp 900w, assets/furniture/hero-living.webp 2650w"
+      imagesizes="100vw" href="assets/furniture/hero-living.webp">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/site-nav.css">
+<!-- the collection-page shell (header, hero, strip, filters, grid) is shared
+     with furnishing.html; page-collection.css adds what the catalogue pages
+     have in common on top of it -->
+<link rel="stylesheet" href="css/page-furnishing.css">
+<link rel="stylesheet" href="css/page-collection.css">
+<link rel="stylesheet" href="css/panels.css">
+<link rel="stylesheet" href="css/hover.css">
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body class="shop-page" data-collection="furniture">
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ===================== HEADER ===================== -->
+<header class="shop-header">
+  <div class="shop-header__inner">
+    <a class="brand" href="index.html" aria-label="URHOM — home">
+      <picture><source type="image/webp" srcset="assets/logo-mark.webp"><img class="brand__mark" src="assets/logo-mark.png" alt="" width="256" height="256"></picture>
+      <span class="brand__name">URHOM</span>
+    </a>
+
+    <nav class="shop-nav" aria-label="Primary">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a class="is-active" href="furniture.html" aria-current="page">Furniture</a></li>
+        <li><a href="furnishing.html">Furnishing</a></li>
+        <li><a href="interiors.html">Interiors</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+
+    <form class="shop-search" role="search" data-search-form>
+      <label class="u-sr-only" for="shop-q">Search furniture</label>
+      <input id="shop-q" type="search" placeholder="Search for sofas, beds, dining tables…" data-search autocomplete="off">
+      <button type="submit" aria-label="Search">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="6.6" stroke="currentColor" stroke-width="1.7"/><path d="M16.1 16.1 20.4 20.4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      </button>
+    </form>
+
+    <div class="shop-actions">
+      <div class="uactions" data-uactions></div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ====================== HERO ====================== -->
+  <section class="fhero fhero--pano" aria-label="Furniture collection">
+    <div class="fhero__media" aria-hidden="true">
+      <picture class="fhero__slide is-on" data-slide="0">
+        <source type="image/webp" sizes="100vw" srcset="assets/furniture/hero-living-sm.webp 900w, assets/furniture/hero-living.webp 2650w">
+        <img src="assets/furniture/hero-living.jpg" alt="" width="2650" height="346" fetchpriority="high" decoding="async">
+      </picture>
+    </div>
+
+    <div class="fhero__inner">
+      <div class="fhero__copy">
+        <p class="fhero__eyebrow">Furniture Collection</p>
+        <h1 class="fhero__title">Furniture<br>for every space<em>.</em></h1>
+        <p class="fhero__lede">Explore our wide range of premium furniture<br>crafted for comfort, style and modern living.</p>
+        <a class="btn btn--primary btn--lg" href="#catalog">
+          <span class="btn__label">Explore All Furniture</span>
+          <svg class="btn__arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CATEGORY STRIP ================= -->
+  <nav class="catstrip" aria-label="Furniture categories" data-catstrip></nav>
+
+  <!-- =================== PRODUCT AREA =================== -->
+  <div class="shop" id="catalog">
+
+
+    <!-- ---------------- listing ---------------- -->
+    <section class="listing" aria-label="Furniture products">
+      <div class="toolbar">
+        <div class="toolbar__head">
+          <h2 class="toolbar__title">All Furniture</h2>
+          <p class="toolbar__sub">Discover furniture designed for modern lifestyles.</p>
+        </div>
+        <div class="toolbar__ctl">
+          <!-- one Filters control; the panel itself is closed until asked for -->
+          <div class="filterbox">
+            <button class="filterbtn" type="button" data-filters-toggle
+                    aria-expanded="false" aria-controls="filters-panel">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M7 12h10M10 17h4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
+              <span>Filters</span>
+              <span class="filterbtn__n" data-filter-n hidden>0</span>
+            </button>
+
+            <aside class="filters" id="filters-panel" aria-label="Product filters" data-filters-panel hidden>
+              <div class="filters__head">
+                <h3 class="filters__title">Filters</h3>
+                <button class="filters__clear" type="button" data-clear>Clear All</button>
+              </div>
+              <!-- every group is a closed disclosure; js/collection.js fills them
+                   from the catalogue so the option lists cannot drift from it -->
+              <div class="fgroups" data-filter-groups></div>
+              <div class="filters__foot">
+                <button class="filters__done" type="button" data-filters-close>Show results</button>
+              </div>
+            </aside>
+          </div>
+
+          <label class="sortby"><span>Sort by:</span>
+            <select data-sort>
+              <option value="featured">Featured</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+              <option value="rating">Top Rated</option>
+              <option value="name">Name (A–Z)</option>
+            </select>
+          </label>
+          <div class="viewtog" role="group" aria-label="View">
+            <button type="button" class="is-on" data-view="grid" aria-label="Grid view" aria-pressed="true">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.6"/></svg>
+            </button>
+            <button type="button" data-view="list" aria-label="List view" aria-pressed="false">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="3.4" rx="1.4"/><rect x="3.5" y="10.3" width="17" height="3.4" rx="1.4"/><rect x="3.5" y="16.1" width="17" height="3.4" rx="1.4"/></svg>
+            </button>
+          </div>
+          <p class="toolbar__count" data-count aria-live="polite"></p>
+        </div>
+      </div>
+
+      <div class="chips" data-chips hidden></div>
+      <div class="grid" data-grid></div>
+      <p class="empty" data-empty hidden>No furniture matches these filters. <button type="button" data-clear>Clear all filters</button></p>
+    </section>
+  </div>
+</main>
+
+<footer class="shop-foot">
+  <p>&copy; 2026 URHOM. All rights reserved.</p>
+  <p><a href="index.html">Back to the main site</a></p>
+</footer>
+
+<script src="js/catalog.js"></script>
+<script src="js/store.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/collection.js"></script>
+<script src="js/site.js"></script>
+<script src="js/panels.js"></script>
+<script src="js/whatsapp.js"></script>
+</body>
+</html>

@@ -1,0 +1,351 @@
+/* ============================================================
+   URHOM — SECTION 02 / COLLECTIONS
+   Reference geometry @1774 x 887 artboard:
+     left column starts   x 113   → 6.37vw
+     eyebrow              y 159,  cap height 10   (≈15px type)
+     headline             y 209–376, 3 lines, ≈58px / 64px leading
+     paragraph            y 410–524, 5 lines, ≈17.5px / 24.7px leading
+     CTA pill             113 → 373, h 50
+     index 01/02/03       y ≈ 648–674
+     cards                452–870 | 880–1299 | 1309–1728, y 115–781
+                          (419 wide, 666 tall, 10px gutter)
+     card arrow button    Ø 56, inset 31 right / 46 bottom
+   Tokens, buttons and the reveal system come from base.css.
+   ============================================================ */
+
+.collections{
+  position:relative;
+  background:#FEFCFA;
+  padding-block:clamp(72px,6.5vw,118px);   /* 115 / 1774 */
+  overflow:hidden;
+  isolation:isolate;
+}
+
+.collections__inner{
+  display:grid;
+  grid-template-columns:19.1vw 1fr;        /* copy column, then the card rail */
+  column-gap:clamp(24px,2.3vw,44px);
+  align-items:center;
+  padding-left:var(--gutter-rail);         /* 113 / 1774 — shared with 04 */
+  padding-right:2.6vw;                     /* 1774 − 1728 */
+}
+
+/* ---- the oversized ghost numeral, bottom-left ---- */
+.collections__ghost{
+  position:absolute;
+  left:2.2vw;
+  bottom:-.22em;
+  z-index:-1;
+  font-size:clamp(150px,15.5vw,290px);
+  font-weight:700;
+  line-height:1;
+  letter-spacing:-.04em;
+  color:#F4F0EA;
+  user-select:none;
+  pointer-events:none;
+}
+
+
+/* ============================================================
+   LEFT — copy column
+   ============================================================ */
+
+.collections__copy{ position:relative; }
+
+.collections__eyebrow{
+  font-size:clamp(10.5px,.846vw,16px);     /* 15 / 1774 */
+  font-weight:600;
+  letter-spacing:.17em;
+  text-transform:uppercase;
+  color:#73726E;
+}
+
+.collections__title{
+  margin-top:clamp(12px,1.35vw,26px);
+  font-size:clamp(32px,3.27vw,62px);       /* 58 / 1774 */
+  font-weight:600;
+  line-height:1.07;                        /* 64px pitch incl. the mask padding */
+  letter-spacing:-.03em;
+  color:var(--ink);
+}
+.collections__title em{
+  font-style:normal;
+  color:var(--yellow);
+}
+
+.collections__lede{
+  margin-top:clamp(16px,1.3vw,26px);
+  font-size:clamp(14px,.99vw,19px);        /* 17.5 / 1774 */
+  font-weight:400;
+  line-height:1.42;                        /* 24.7 / 17.5 */
+  letter-spacing:-.004em;
+  color:var(--ink-mute);
+  max-width:34ch;
+}
+
+.collections__cta{ margin-top:clamp(22px,1.75vw,34px); }
+
+/* ---- 01 / 02 / 03 collection index ---- */
+
+/* ---- rail controls, matching .pnav in section 04 ---- */
+
+.cnav{
+  display:flex;
+  align-items:center;
+  gap:clamp(12px,1.3vw,24px);
+  margin-top:clamp(26px,2.5vw,46px);
+}
+.cnav[hidden]{ display:none; }          /* nothing to scroll — no controls */
+
+.cnav__btn{
+  display:grid;
+  place-items:center;
+  width:clamp(36px,2.76vw,52px);
+  aspect-ratio:1;
+  border-radius:50%;
+  border:1px solid rgba(24,22,18,.18);
+  background:rgba(255,255,255,.7);
+  color:var(--ink);
+  transition:background var(--t-med) var(--ease-out),
+             border-color var(--t-med) var(--ease-out),
+             transform var(--t-med) var(--ease-soft),
+             opacity var(--t-med) var(--ease-out);
+}
+.cnav__btn svg{ width:42%; height:42%; }
+.cnav__btn:hover:not(:disabled){
+  background:var(--yellow);
+  border-color:var(--yellow);
+  transform:scale(1.06);
+}
+.cnav__btn:focus-visible{ outline:2px solid var(--ink); outline-offset:3px; }
+.cnav__btn:disabled{ opacity:.34; cursor:default; }
+
+.cnav__track{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  flex:1 1 auto;
+  max-width:clamp(80px,9vw,170px);
+}
+.cnav__dot{
+  flex:1 1 0;
+  height:3px;
+  border-radius:3px;
+  background:var(--hair);
+  transition:background var(--t-med) var(--ease-out);
+}
+.cnav__dot.is-on{ background:var(--yellow); }
+
+@media (prefers-reduced-motion: reduce){
+  .cnav__btn{ transition:opacity var(--t-med) linear; }
+  .cnav__btn:hover:not(:disabled){ transform:none; }
+}
+
+
+/* ============================================================
+   RIGHT — card rail
+   ============================================================ */
+
+/* A horizontal rail, same recipe as .prail in section 04: native scroll,
+   snap points, hidden scrollbar, nothing hijacked. The card keeps the width
+   it had as a third of the old three-column grid, so the section looks
+   unchanged at full width and simply scrolls once it no longer fits. */
+.ccards{
+  display:flex;
+  gap:clamp(8px,.56vw,12px);               /* 10 / 1774 */
+  overflow-x:auto;
+  overflow-y:hidden;
+  scroll-snap-type:x mandatory;
+  scroll-behavior:smooth;
+  scrollbar-width:none;
+  -ms-overflow-style:none;
+  padding-block:4px;
+  overscroll-behavior-x:contain;           /* keeps the page scrolling vertically */
+}
+.ccards::-webkit-scrollbar{ display:none; }
+.ccards:focus-visible{ outline:2px solid var(--ink); outline-offset:4px; border-radius:6px; }
+
+@media (prefers-reduced-motion: reduce){
+  .ccards{ scroll-behavior:auto; }
+}
+
+.ccard{
+  position:relative;
+  display:block;
+  flex:0 0 calc((100% - 2 * clamp(8px,.56vw,12px)) / 3);
+  scroll-snap-align:start;
+  aspect-ratio:419 / 666;
+  border-radius:clamp(14px,1.24vw,24px);
+  overflow:hidden;
+  isolation:isolate;
+  background:#E9E4DC;
+  box-shadow:0 18px 44px -26px rgba(48,38,24,.42);
+  transition:transform .55s var(--ease-soft),
+             box-shadow .55s var(--ease-soft);
+}
+.ccard:hover{
+  transform:translateY(-6px);
+  box-shadow:0 30px 60px -28px rgba(48,38,24,.52);
+}
+
+.ccard__img{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover;
+  transform:scale(1.02);
+  transition:transform .9s var(--ease-soft);
+}
+.ccard:hover .ccard__img{ transform:scale(1.07); }
+
+/* readability wash under the copy */
+.ccard::after{
+  content:"";
+  position:absolute; inset:0;
+  background:linear-gradient(
+    to top,
+    rgba(12,9,6,.86)  0%,
+    rgba(12,9,6,.72) 16%,
+    rgba(12,9,6,.34) 38%,
+    rgba(12,9,6,.06) 58%,
+    rgba(12,9,6,0)   74%);
+  transition:opacity var(--t-med) var(--ease-out);
+}
+
+.ccard__body{
+  position:absolute;
+  left:0; right:0; bottom:0;
+  z-index:1;
+  display:flex;
+  align-items:flex-end;
+  gap:clamp(10px,1vw,20px);
+  padding:clamp(18px,1.75vw,34px);
+}
+
+.ccard__text{ flex:1 1 auto; min-width:0; }
+
+.ccard__title{
+  display:block;
+  font-size:clamp(19px,1.69vw,32px);
+  font-weight:600;
+  line-height:1.1;
+  letter-spacing:-.022em;
+  color:#fff;
+}
+
+.ccard__desc{
+  display:block;
+  margin-top:clamp(6px,.5vw,10px);
+  font-size:clamp(12.5px,.85vw,16px);
+  font-weight:400;
+  line-height:1.4;
+  letter-spacing:-.002em;
+  color:rgba(255,255,255,.88);
+}
+
+.ccard__go{
+  flex:0 0 auto;
+  display:grid;
+  place-items:center;
+  width:clamp(38px,3.16vw,60px);           /* 56 / 1774 */
+  aspect-ratio:1;
+  border-radius:50%;
+  background:var(--yellow);
+  color:var(--ink);
+  box-shadow:0 2px 10px -4px rgba(90,65,0,.5);
+  transition:transform var(--t-med) var(--ease-soft),
+             background var(--t-med) var(--ease-out);
+}
+.ccard__go svg{ width:46%; height:46%; }
+.ccard:hover .ccard__go{
+  background:var(--yellow-soft);
+  transform:scale(1.08);
+}
+.ccard:hover .ccard__go svg{ transform:translateX(2px); }
+.ccard__go svg{ transition:transform var(--t-med) var(--ease-soft); }
+
+
+/* ============================================================
+   ENTRANCE — rides the shared [data-reveal] system in base.css
+   ============================================================ */
+
+.js [data-reveal="card"]{
+  opacity:0;
+  transform:translate3d(0,30px,0);
+  transition:opacity .8s var(--ease-out) var(--d),
+             transform .9s var(--ease-out) var(--d);
+  will-change:opacity,transform;
+}
+.js [data-reveal="card"].is-revealed{ opacity:1; transform:none; }
+
+.js [data-reveal="card"] .ccard__img{
+  transform:scale(1.14);
+  transition:transform 1.25s var(--ease-soft) var(--d);
+}
+.js [data-reveal="card"].is-revealed .ccard__img{ transform:scale(1.02); }
+
+@media (prefers-reduced-motion: reduce){
+  .js [data-reveal="card"]{ opacity:1 !important; transform:none !important; }
+  .js [data-reveal="card"] .ccard__img{ transform:scale(1.02) !important; }
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+/* narrower desktop — the copy column needs a little more room */
+@media (max-width:1440px){
+  .collections__inner{
+    grid-template-columns:22.5vw 1fr;
+    padding-left:5vw;
+    padding-right:4vw;
+  }
+}
+
+/* laptop / tablet — copy moves above the rail, cards go two-up */
+@media (max-width:1180px){
+  .collections{ padding-block:clamp(72px,9vw,110px); }
+  .collections__inner{
+    grid-template-columns:1fr;
+    row-gap:clamp(36px,5vw,64px);
+    padding-inline:clamp(28px,6vw,64px);
+  }
+  .collections__copy{ max-width:640px; }
+  .collections__eyebrow{ font-size:12px; letter-spacing:.16em; }
+  .collections__title{ margin-top:18px; font-size:clamp(34px,5.4vw,52px); }
+  .collections__lede{ font-size:17px; max-width:48ch; }
+  .collections__lede br{ display:none; }
+
+  /* the rail stays one row; the cards simply overflow and scroll */
+  .ccards{ gap:clamp(12px,1.6vw,20px); padding-right:6vw; }
+  .ccard{
+    flex:0 0 min(62vw,360px);
+    aspect-ratio:4 / 5;
+  }
+  .ccard:nth-child(3) .ccard__desc{ max-width:46ch; }
+
+  .collections__ghost{ font-size:clamp(130px,17vw,220px); left:1vw; }
+}
+
+/* mobile — one card per row, nothing cramped */
+@media (max-width:760px){
+  .collections{ padding-block:clamp(64px,13vw,92px); }
+  .collections__inner{ padding-inline:24px; row-gap:34px; }
+
+  .collections__eyebrow{ font-size:11px; }
+  .collections__title{ margin-top:14px; font-size:clamp(30px,8.6vw,42px); line-height:1.08; }
+  .collections__lede{ margin-top:14px; font-size:16px; max-width:38ch; }
+  .collections__cta{ margin-top:24px; }
+  .collections__cta .btn--lg{ height:52px; font-size:15px; padding-inline:24px; }
+  .cnav{ margin-top:26px; }
+
+  .ccards{ gap:14px; padding-right:24px; }
+  .ccard,
+  .ccard:nth-child(3){ flex:0 0 min(78vw,320px); aspect-ratio:4 / 5; }
+  .ccard__body{ padding:20px; }
+  .ccard__title{ font-size:22px; }
+  .ccard__desc{ font-size:14px; }
+  .ccard__go{ width:44px; }
+
+  .collections__ghost{ font-size:30vw; left:14px; bottom:-.26em; }
+}

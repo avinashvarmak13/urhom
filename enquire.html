@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Enquire | URHOM</title>
+<meta name="description" content="Tell URHOM about your space and what you are looking for — furniture, furnishing or interiors — and the team will get back to you.">
+<meta name="theme-color" content="#ffffff">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/webp" href="assets/logo-mark.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/site-nav.css">
+<link rel="stylesheet" href="css/page-furnishing.css">
+<link rel="stylesheet" href="css/page-enquire.css">
+<link rel="stylesheet" href="css/panels.css">
+<link rel="stylesheet" href="css/hover.css">
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body class="shop-page enquire-page">
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="shop-header">
+  <div class="shop-header__inner">
+    <a class="brand" href="index.html" aria-label="URHOM — home">
+      <picture><source type="image/webp" srcset="assets/logo-mark.webp"><img class="brand__mark" src="assets/logo-mark.png" alt="" width="256" height="256"></picture>
+      <span class="brand__name">URHOM</span>
+    </a>
+    <nav class="shop-nav" aria-label="Primary">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="furniture.html">Furniture</a></li>
+        <li><a href="furnishing.html">Furnishing</a></li>
+        <li><a href="interiors.html">Interiors</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+    <div class="shop-actions" style="margin-left:auto">
+      <button class="icon-round" type="button" aria-label="Search" data-search-open>
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="6.6" stroke="currentColor" stroke-width="1.7"/><path d="M16.1 16.1 20.4 20.4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      </button>
+      <div class="uactions" data-uactions></div>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="enq">
+  <div class="enq__inner">
+
+    <div class="enq__intro">
+      <p class="enq__eyebrow">Enquiry</p>
+      <h1 class="enq__title">Let's talk about<br>your space<em>.</em></h1>
+      <p class="enq__lede">Tell us what you have in mind. We will call you back and
+        take it from there — no forms to fill twice.</p>
+
+      <ul class="enq__points">
+        <li>
+          <h2>One roof</h2>
+          <p>Furniture, furnishing and interiors, chosen to work together.</p>
+        </li>
+        <li>
+          <h2>Guided, not sold to</h2>
+          <p>Advice from people who fit out rooms like yours every week.</p>
+        </li>
+        <li>
+          <h2>Looked after</h2>
+          <p>Delivery, installation and after-sales handled by our own team.</p>
+        </li>
+      </ul>
+
+      <div class="enq__direct">
+        <p><a href="tel:+919876543210">+91 98765 43210</a></p>
+        <p><a href="mailto:hello@urhom.in">hello@urhom.in</a></p>
+        <p class="enq__direct-s">Visakhapatnam, Andhra Pradesh</p>
+      </div>
+    </div>
+
+    <!-- novalidate: the browser's own bubbles are replaced with inline,
+         screen-reader-announced messages in js/enquire.js -->
+    <form class="enq__form" id="enquiry" novalidate data-enquiry>
+
+      <fieldset class="field" aria-describedby="e-interest">
+        <legend>What are you looking for?</legend>
+        <div class="pickers" role="group">
+          <label class="picker"><input type="checkbox" name="interest" value="Furniture"><span>Furniture</span></label>
+          <label class="picker"><input type="checkbox" name="interest" value="Furnishing"><span>Furnishing</span></label>
+          <label class="picker"><input type="checkbox" name="interest" value="Interiors"><span>Interiors</span></label>
+          <label class="picker"><input type="checkbox" name="interest" value="Full home"><span>Full home</span></label>
+        </div>
+        <p class="err" id="e-interest" data-err hidden></p>
+      </fieldset>
+
+      <div class="field">
+        <label for="f-name">Full name</label>
+        <input id="f-name" name="name" type="text" autocomplete="name" required
+               minlength="2" maxlength="80" aria-describedby="e-name">
+        <p class="err" id="e-name" data-err hidden></p>
+      </div>
+
+      <div class="field">
+        <label for="f-phone">Phone number</label>
+        <div class="phone">
+          <span class="phone__cc">+91</span>
+          <input id="f-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national"
+                 required maxlength="18" placeholder="98765 43210" aria-describedby="e-phone">
+        </div>
+        <p class="err" id="e-phone" data-err hidden></p>
+      </div>
+
+      <div class="field">
+        <label for="f-msg">Tell us about your space <span class="opt">Optional</span></label>
+        <textarea id="f-msg" name="message" rows="4" maxlength="1200"
+                  placeholder="Rooms you want done, a style you like, anything already bought…"
+                  aria-describedby="f-msg-count"></textarea>
+        <p class="counter" id="f-msg-count" data-counter>0 / 1200</p>
+      </div>
+
+      <!-- a bot trap: a real person never sees or fills this -->
+      <div class="hp" aria-hidden="true">
+        <label for="f-company">Company</label>
+        <input id="f-company" name="company" type="text" tabindex="-1" autocomplete="off">
+      </div>
+
+      <p class="enq__error" data-form-error hidden role="alert"></p>
+
+      <button class="btn btn--primary btn--lg enq__submit" type="submit" data-submit>
+        <span class="btn__label">Request a Callback</span>
+        <svg class="btn__arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+
+      <p class="enq__note" data-note></p>
+    </form>
+
+    <!-- shown in place of the form only once the handover actually happened -->
+    <div class="enq__done" data-done hidden tabindex="-1">
+      <span class="enq__tick" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <h2 data-done-title></h2>
+      <p data-done-msg></p>
+      <div class="enq__done-cta" data-done-cta></div>
+      <button class="enq__again" type="button" data-again>Go back to the form</button>
+    </div>
+
+  </div>
+</main>
+
+<footer class="shop-foot">
+  <p>&copy; 2026 URHOM. All rights reserved.</p>
+  <p><a href="index.html">Back to the main site</a></p>
+</footer>
+
+<script src="js/catalog.js"></script>
+<script src="js/store.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/site.js"></script>
+<script src="js/panels.js"></script>
+<script src="js/enquire.js"></script>
+<script src="js/whatsapp.js"></script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My Wishlist | URHOM</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="Explore URHOM's wide range of interior and home decor essentials that bring warmth, personality and style to every corner — rugs, bedsheets, cushions, vases, lighting, mirrors, clocks and storage.">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/webp" href="assets/logo-mark.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/site-nav.css">
+<!-- the collection-page shell (header, hero, strip, filters, grid) is shared
+     with furnishing.html; page-collection.css adds what the catalogue pages
+     have in common on top of it -->
+<link rel="stylesheet" href="css/page-furnishing.css">
+<link rel="stylesheet" href="css/page-collection.css">
+<link rel="stylesheet" href="css/panels.css">
+<link rel="stylesheet" href="css/hover.css">
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body class="shop-page wish-page">
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ===================== HEADER ===================== -->
+<header class="shop-header">
+  <div class="shop-header__inner">
+    <a class="brand" href="index.html" aria-label="URHOM — home">
+      <picture><source type="image/webp" srcset="assets/logo-mark.webp"><img class="brand__mark" src="assets/logo-mark.png" alt="" width="256" height="256"></picture>
+      <span class="brand__name">URHOM</span>
+    </a>
+
+    <nav class="shop-nav" aria-label="Primary">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="furniture.html">Furniture</a></li>
+        <li><a href="furnishing.html">Furnishing</a></li>
+        <li><a href="interiors.html">Interiors</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+
+    <form class="shop-search" role="search" data-search-form>
+      <label class="u-sr-only" for="shop-q">Search interiors</label>
+      <input id="shop-q" type="search" placeholder="Search for vases, carpets, bed sheets, decor…" data-search autocomplete="off">
+      <button type="submit" aria-label="Search">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="6.6" stroke="currentColor" stroke-width="1.7"/><path d="M16.1 16.1 20.4 20.4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      </button>
+    </form>
+
+    <div class="shop-actions">
+      <div class="uactions" data-uactions></div>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="wishpage">
+  <div class="wishpage__inner">
+    <header class="wishpage__head">
+      <p class="wishpage__eyebrow">Saved</p>
+      <h1 class="wishpage__title">My Wishlist<em>.</em></h1>
+      <p class="wishpage__count" data-wp-count aria-live="polite"></p>
+    </header>
+
+    <div class="grid" data-wp-grid></div>
+
+    <div class="wishpage__empty" data-wp-empty hidden>
+      <p>Nothing saved yet.</p>
+      <p class="wishpage__sub">Tap the heart on any product and it will wait for you here.</p>
+      <div class="wishpage__cta">
+        <a class="btn btn--primary btn--lg" href="furniture.html"><span class="btn__label">Browse Furniture</span></a>
+        <a class="btn btn--ghost btn--lg" href="interiors.html"><span class="btn__label">Browse Interiors</span></a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="shop-foot">
+  <p>&copy; 2026 URHOM. All rights reserved.</p>
+  <p><a href="index.html">Back to the main site</a></p>
+</footer>
+
+<script src="js/catalog.js"></script>
+<script src="js/store.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/site.js"></script>
+<script src="js/panels.js"></script>
+<script src="js/wishlist.js"></script>
+<script src="js/whatsapp.js"></script>
+</body>
+</html>

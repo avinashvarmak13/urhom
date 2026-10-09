@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About | URHOM</title>
+<meta name="description" content="URHOM is a home and space solutions company bringing together furniture, furnishing, home decor and complete interior solutions — designed for real people, real spaces and real lifestyles.">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/webp" href="assets/logo-mark.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" type="image/webp" fetchpriority="high" href="assets/hero.webp">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/site-nav.css">
+<!-- the collection-page shell (header, hero, strip, filters, grid) is shared
+     with furnishing.html; page-collection.css adds what the catalogue pages
+     have in common on top of it -->
+<link rel="stylesheet" href="css/page-furnishing.css">
+<link rel="stylesheet" href="css/page-about.css">
+<link rel="stylesheet" href="css/panels.css">
+<link rel="stylesheet" href="css/hover.css">
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body class="shop-page about-page">
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ===================== HEADER ===================== -->
+<header class="shop-header">
+  <div class="shop-header__inner">
+    <a class="brand" href="index.html" aria-label="URHOM — home">
+      <picture><source type="image/webp" srcset="assets/logo-mark.webp"><img class="brand__mark" src="assets/logo-mark.png" alt="" width="256" height="256"></picture>
+      <span class="brand__name">URHOM</span>
+    </a>
+
+    <nav class="shop-nav" aria-label="Primary">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="furniture.html">Furniture</a></li>
+        <li><a href="furnishing.html">Furnishing</a></li>
+        <li><a href="interiors.html">Interiors</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a class="is-active" href="about.html" aria-current="page">About</a></li>
+      </ul>
+    </nav>
+
+    <form class="shop-search" role="search" data-search-form>
+      <label class="u-sr-only" for="shop-q">Search interiors</label>
+      <input id="shop-q" type="search" placeholder="Search for furniture, decor, curtains…" data-search autocomplete="off">
+      <button type="submit" aria-label="Search">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="6.6" stroke="currentColor" stroke-width="1.7"/><path d="M16.1 16.1 20.4 20.4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      </button>
+    </form>
+
+    <div class="shop-actions">
+      <div class="uactions" data-uactions></div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ===================== 1 · HERO ===================== -->
+  <section class="ab-hero" aria-labelledby="ab-h1">
+    <div class="ab-hero__media" aria-hidden="true"><picture><source type="image/webp" srcset="assets/hero.webp"><img class="ab-hero__img" src="assets/hero.jpg" alt="" width="1774" height="887" fetchpriority="high" decoding="async"></picture></div>
+    <div class="ab-hero__inner">
+      <p class="ab-eyebrow ab-eyebrow--light">About URHOM</p>
+      <h1 class="ab-hero__title" id="ab-h1">More than interiors.<br>A better way to <em>live.</em></h1>
+      <p class="ab-hero__lede">URHOM is a home and space solutions company<br>
+        that brings together furniture, furnishing, home decor<br>
+        and complete interior solutions — designed for real<br>
+        people, real spaces and real lifestyles.</p>
+      <a class="btn btn--primary btn--sm ab-hero__cta" href="#story">
+        <span class="btn__label">Our Story</span><svg class="btn__arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+    <ul class="ab-caps"><li><svg class="ab-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3.5 10.5 12 4l8.5 6.5V20h-17Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9.5 20v-5.5h5V20" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span><b>Complete</b>Home Solutions</span></li><li><svg class="ab-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3.5 3 4.5h5.5L16 13.5 17.2 20 12 17l-5.2 3L8 13.5 3.5 8H9Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span><b>Premium</b>Quality</span></li><li><svg class="ab-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 20h4L19.3 8.7a2 2 0 0 0 0-2.8l-1.2-1.2a2 2 0 0 0-2.8 0L4 16v4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span><b>Design-Led</b>Approach</span></li><li><svg class="ab-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 13a8 8 0 0 1 16 0v4a2 2 0 0 1-2 2h-1.5v-6H20M4 17v-4h3.5v6H6a2 2 0 0 1-2-2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span><b>End-to-End</b>Support</span></li></ul>
+  </section>
+
+  <!-- =================== 2 · STATISTICS ================== -->
+  <section class="ab-stats" aria-label="URHOM in numbers">
+    <p class="ab-stats__note">Indicative figures — pending verification before publication.</p>
+    <div class="ab-stats__row"><div class="ab-stat"><svg class="ab-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3.5 10.5 12 4l8.5 6.5V20h-17Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9.5 20v-5.5h5V20" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span><b>250+</b><i>Projects Completed</i></span></div><div class="ab-stat"><svg class="ab-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s-6.4-5.8-6.4-10.5A6.4 6.4 0 0 1 18.4 10.5C18.4 15.2 12 21 12 21Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="10.3" r="2.3" stroke="currentColor" stroke-width="1.6"/></svg><span><b>15+</b><i>Cities Across India</i></span></div><div class="ab-stat"><svg class="ab-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="1.6" stroke="currentColor" stroke-width="1.6"/><path d="M4 12h16M12 4v16" stroke="currentColor" stroke-width="1.6"/></svg><span><b>1M+</b><i>Sq.ft. Transformed</i></span></div><div class="ab-stat"><svg class="ab-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9 6.8 19.6l1-5.8-4.3-4.1 5.9-.9Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span><b>98%</b><i>Client Satisfaction</i></span></div></div>
+  </section>
+
+  <!-- ==================== 3 · OUR STORY =================== -->
+  <section class="ab-story" id="story" aria-labelledby="ab-story-h">
+    <figure class="ab-story__shot"><picture><source type="image/webp" srcset="assets/process-bg.webp"><img class="ab-story__img" src="assets/process-bg.jpg" alt="A warm dining space with timber chairs, pendant lighting and planting." width="1774" height="887" loading="lazy" decoding="async"></picture>
+      <figcaption class="ab-story__over">Creating<br>homes that<br>feel like you<em>.</em></figcaption>
+    </figure>
+
+    <div class="ab-story__copy">
+      <p class="ab-eyebrow">Our Story</p>
+      <h2 class="ab-h2" id="ab-story-h">Built on a simple belief.<br>Every space has a story<em>.</em></h2>
+      <p>URHOM was founded with a simple belief — everyone deserves a beautiful, functional and inspiring space.</p>
+      <p>What started as a passion for design and quality products has today grown into a complete home and space
+        solutions brand, serving homeowners, businesses and institutions across India.</p>
+      <p>From a single room makeover to large commercial projects, our focus remains the same — thoughtful design,
+        premium products, and a seamless experience from inspiration to installation.</p>
+    </div>
+
+    <div class="ab-story__aside">
+      <figure class="ab-story__still"><picture><source type="image/webp" srcset="assets/card-decor.webp"><img class="ab-story__still-img" src="assets/card-decor.jpg" alt="A console styled with stoneware vases, bowls and framed art." width="505" height="767" loading="lazy" decoding="async"></picture></figure>
+      <blockquote class="ab-quote">&ldquo;Homes are not just spaces,<br>they are stories<br>waiting to be lived.&rdquo;</blockquote>
+    </div>
+  </section>
+
+  <!-- ===== 4 · PURPOSE, VISION, MISSION & VALUES ===== -->
+  <section class="ab-purpose" aria-labelledby="ab-purpose-h">
+    <div class="ab-purpose__copy">
+      <p class="ab-eyebrow">Our Purpose</p>
+      <h2 class="ab-h2" id="ab-purpose-h">To make beautiful,<br>functional spaces<br>accessible to everyone<em>.</em></h2>
+      <p>We want to simplify the way people create and transform their spaces — by bringing together the best in
+        furniture, furnishing, home decor and interior solutions under one trusted brand.</p>
+    </div>
+
+    <div class="ab-cards">
+      <article class="ab-card">
+        <div class="ab-card__shot"><picture><source type="image/webp" srcset="assets/love-living.webp"><img class="ab-card__img" src="assets/love-living.jpg" alt="A living room with a pale sofa, round table and potted greenery." width="419" height="355" loading="lazy" decoding="async"></picture></div>
+        <span class="ab-card__ic"><svg class="" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="7.5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3.2" stroke="currentColor" stroke-width="1.6"/></svg></span>
+        <h3>Our Vision</h3>
+        <p>To be India's most trusted home and space solutions brand, known for design, quality and customer experience.</p>
+      </article>
+      <article class="ab-card">
+        <div class="ab-card__shot"><picture><source type="image/webp" srcset="assets/furniture/p-vero-accent-chair.webp"><img class="ab-card__img" src="assets/furniture/p-vero-accent-chair.jpg" alt="A rounded accent chair on tapered wooden legs beside a plant." width="272" height="140" loading="lazy" decoding="async"></picture></div>
+        <span class="ab-card__ic"><svg class="" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="9.5" r="5" stroke="currentColor" stroke-width="1.6"/><path d="m8.6 13.6-1.1 6 4.5-2.3 4.5 2.3-1.1-6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+        <h3>Our Mission</h3>
+        <p>To transform everyday spaces into beautiful, functional and inspiring environments through curated products,
+          expert guidance and seamless service.</p>
+      </article>
+      <article class="ab-card">
+        <div class="ab-card__shot"><picture><source type="image/webp" srcset="assets/interiors/p-ceramic-flower-vase.webp"><img class="ab-card__img" src="assets/interiors/p-ceramic-flower-vase.jpg" alt="Pale ceramic vases and a brass bottle on a sunlit sideboard." width="356" height="158" loading="lazy" decoding="async"></picture></div>
+        <span class="ab-card__ic"><svg class="" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="9.5" cy="9" r="2.8" stroke="currentColor" stroke-width="1.6"/><path d="M4 19a5.5 5.5 0 0 1 11 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M16 7.2a2.8 2.8 0 0 1 0 5.6M17 19a5.5 5.5 0 0 0-1.6-3.9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+        <h3>Our Values</h3>
+        <ul class="ab-card__list">
+          <li>Design with purpose</li><li>Customer first</li><li>Quality without compromise</li>
+          <li>Honesty and transparency</li><li>Innovation and continuous improvement</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============== 5 · THE URHOM DIFFERENCE ============== -->
+  <section class="ab-diff" aria-labelledby="ab-diff-h">
+    <div class="ab-diff__copy">
+      <p class="ab-eyebrow">The URHOM Difference</p>
+      <h2 class="ab-h2 ab-h2--sm" id="ab-diff-h">A complete home<br>solution, under one roof<em>.</em></h2>
+      <p>From inspiration to installation, we make the entire journey simple, seamless and enjoyable.</p>
+      <a class="btn btn--primary btn--sm" href="furniture.html">
+        <span class="btn__label">Explore Our Collections</span><svg class="btn__arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+    <ul class="ab-benefits"><li><svg class="ab-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 11.5V9a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M3 13.2a1.7 1.7 0 0 1 3.4 0V16h11.2v-2.8a1.7 1.7 0 0 1 3.4 0V19H3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><b>Wide Range</b><span>Furniture, furnishing,<br>home decor &amp; more</span></li><li><svg class="ab-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="9.5" cy="9" r="2.8" stroke="currentColor" stroke-width="1.6"/><path d="M4 19a5.5 5.5 0 0 1 11 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M16 7.2a2.8 2.8 0 0 1 0 5.6M17 19a5.5 5.5 0 0 0-1.6-3.9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><b>Expert Guidance</b><span>Personalised design<br>and product support</span></li><li><svg class="ab-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3.5 5.5 6v5.5c0 4 2.8 7.3 6.5 9 3.7-1.7 6.5-5 6.5-9V6Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="m9 12 2.2 2.2L15.4 10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><b>Quality Assurance</b><span>Carefully curated<br>premium products</span></li><li><svg class="ab-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 7h10v9H3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M13 10h4l3 3v3h-7Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="7" cy="18" r="1.6" stroke="currentColor" stroke-width="1.6"/><circle cx="17" cy="18" r="1.6" stroke="currentColor" stroke-width="1.6"/></svg><b>Pan India Delivery</b><span>Reliable delivery<br>across India</span></li><li><svg class="ab-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 13a8 8 0 0 1 16 0v4a2 2 0 0 1-2 2h-1.5v-6H20M4 17v-4h3.5v6H6a2 2 0 0 1-2-2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><b>Dedicated Support</b><span>From purchase<br>to post-installation</span></li></ul>
+  </section>
+
+  <!-- ============ 6 · EXPERIENCE URHOM IN PERSON ========== -->
+  <section class="ab-store" aria-labelledby="ab-store-h">
+    <figure class="ab-store__shot"><picture><source type="image/webp" srcset="assets/love-bg.webp"><img class="ab-store__img" src="assets/love-bg.jpg" alt="A warmly lit interior display of seating, shelving and styled accessories." width="1774" height="887" loading="lazy" decoding="async"></picture></figure>
+    <div class="ab-store__copy">
+      <p class="ab-eyebrow">Visit Our Experience Center</p>
+      <h2 class="ab-h2 ab-h2--sm" id="ab-store-h">Experience URHOM<br>in person<em>.</em></h2>
+      <p>Explore our curated collections, get expert advice and experience the URHOM difference at our stores.</p>
+      <a class="btn btn--ghost btn--sm" href="index.html#section-07">
+        <span class="btn__label">Find a Store</span><svg class="btn__arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <ul class="ab-store__feats"><li><svg class="ab-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s-6.4-5.8-6.4-10.5A6.4 6.4 0 0 1 18.4 10.5C18.4 15.2 12 21 12 21Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="10.3" r="2.3" stroke="currentColor" stroke-width="1.6"/></svg><span>Multiple Locations</span></li><li><svg class="ab-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="1.6" stroke="currentColor" stroke-width="1.6"/><path d="M4 12h16M12 4v16" stroke="currentColor" stroke-width="1.6"/></svg><span>Wide Display Range</span></li><li><svg class="ab-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="9.5" cy="9" r="2.8" stroke="currentColor" stroke-width="1.6"/><path d="M4 19a5.5 5.5 0 0 1 11 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M16 7.2a2.8 2.8 0 0 1 0 5.6M17 19a5.5 5.5 0 0 0-1.6-3.9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Design Consultation</span></li><li><svg class="ab-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 16V11l1.8-4h10.4L19 11v5" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M3.5 16h17" stroke="currentColor" stroke-width="1.6"/><circle cx="7.5" cy="18" r="1.4" stroke="currentColor" stroke-width="1.6"/><circle cx="16.5" cy="18" r="1.4" stroke="currentColor" stroke-width="1.6"/></svg><span>Easy Parking</span></li></ul>
+    </div>
+  </section>
+</main>
+
+<footer class="shop-foot">
+  <p>&copy; 2026 URHOM. All rights reserved.</p>
+  <p><a href="index.html">Back to the main site</a></p>
+</footer>
+
+<script src="js/catalog.js"></script>
+<script src="js/store.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/site.js"></script>
+<script src="js/panels.js"></script>
+<script src="js/whatsapp.js"></script>
+</body>
+</html>

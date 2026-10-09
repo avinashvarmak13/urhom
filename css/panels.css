@@ -1,0 +1,449 @@
+/* ============================================================
+   URHOM — header panels (wishlist / account / cart) + sign-in
+   White panels, black type, URHOM yellow for badges and primary
+   buttons only. Mounted into [data-uactions] on every page.
+   ============================================================ */
+
+/* The three controls share one translucent, warm-white rounded container,
+   sitting inside the white nav pill and just left of the yellow CTA. */
+.uactions{
+  position:relative;
+  display:flex; align-items:center; gap:2px;
+  flex:0 0 auto;
+  padding:3px;
+  border-radius:999px;
+  background:rgba(250,246,238,.92);
+  border:1px solid rgba(28,24,16,.075);
+  -webkit-backdrop-filter:blur(10px) saturate(1.2);
+  backdrop-filter:blur(10px) saturate(1.2);
+}
+/* hairline between each control, matching the reference's divided group */
+.uact + .uact::before{
+  content:""; position:absolute; left:-1px; top:22%; bottom:22%;
+  width:1px; background:rgba(28,24,16,.1);
+}
+
+.uact{
+  position:relative;
+  display:flex; align-items:center; gap:6px;
+  height:clamp(30px,2.1vw,34px); padding:0 clamp(7px,.62vw,11px);
+  border-radius:999px;
+  color:#45443F;
+  transition:background .18s var(--ease-out), color .18s var(--ease-out);
+}
+.uact:hover{ background:rgba(28,24,16,.055); color:var(--ink); }
+.uact.is-on{ background:#fff; color:var(--ink); box-shadow:0 1px 4px -1px rgba(40,32,18,.18); }
+.uact:focus-visible{ outline:2px solid currentColor; outline-offset:1px; }
+.uact svg{ width:clamp(17px,1.2vw,19px); height:clamp(17px,1.2vw,19px); flex:0 0 auto; }
+.uact__label{
+  font-size:clamp(11px,.76vw,12.5px); font-weight:600; letter-spacing:-.012em;
+  white-space:nowrap;
+}
+.uact__n{
+  position:absolute; top:-2px; left:14px;
+  min-width:17px; height:17px; padding:0 4px;
+  display:grid; place-items:center;
+  border-radius:999px; background:var(--yellow); color:#1C1A16;
+  font-size:10px; font-weight:800; line-height:1;
+}
+.uact__n[hidden]{ display:none; }
+
+/* The home header's pill is white, so these read dark like the nav links
+   beside them — an earlier rule made them white-on-white. */
+
+/* Below this the nav links and the CTA need the room more than the labels do */
+@media (max-width:1360px){
+  .uact__label{ display:none; }
+  .uact{ padding:0 8px; gap:0; }
+  .uact__n{ left:auto; right:-1px; }
+}
+@media (max-width:1080px){
+  .uactions{ padding:2px; background:none; border-color:transparent; backdrop-filter:none; }
+  .uact + .uact::before{ display:none; }
+}
+
+
+/* ============================================================
+   PANELS
+   ============================================================ */
+
+.upanel{
+  position:absolute; z-index:120;
+  top:calc(100% + 12px); right:0;
+  width:min(330px,calc(100vw - 24px));
+  max-height:min(76vh,620px);
+  display:flex; flex-direction:column;
+  background:#fff;
+  border:1px solid #EFEBE3;
+  border-radius:16px;
+  box-shadow:0 26px 58px -26px rgba(32,25,12,.42);
+  opacity:0; transform:translateY(-6px);
+  transition:opacity .17s var(--ease-out), transform .17s var(--ease-out);
+}
+.upanel[hidden]{ display:none; }
+.upanel.is-on{ opacity:1; transform:translateY(0); }
+/* All three hang from the right edge of the actions group. Anchoring the
+   wishlist panel to the left ran it past the viewport on the collection
+   pages, where the group sits much further right than on the home page. */
+
+.upanel__head{
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  padding:14px 15px 11px; border-bottom:1px solid #F3EFE8;
+}
+.upanel__head h2{
+  display:flex; align-items:center; gap:8px;
+  font-size:15px; font-weight:700; letter-spacing:-.016em; color:var(--ink);
+}
+.upanel__head h2 svg{ width:19px; height:19px; }
+.upanel__n{
+  min-width:19px; height:19px; padding:0 5px;
+  display:grid; place-items:center;
+  border-radius:999px; background:var(--yellow); color:#1C1A16;
+  font-size:10.5px; font-weight:800; line-height:1;
+}
+.upanel__link{
+  display:inline-flex; align-items:center; gap:4px;
+  font-size:12px; font-weight:600; color:var(--ink-mute);
+}
+.upanel__link:hover{ color:var(--ink); }
+.upanel__link svg{ width:13px; height:13px; }
+
+.upanel__body{ overflow-y:auto; overscroll-behavior:contain; padding:6px 15px; }
+.upanel__empty{ padding:22px 2px; font-size:13px; line-height:1.55; color:#6E6C66; }
+.upanel__note{
+  margin-top:9px; font-size:11.5px; line-height:1.5; color:#8A8780;
+}
+.upanel__note[hidden]{ display:none; }
+.upanel__stack{ display:grid; gap:8px; padding-bottom:4px; }
+.upanel__foot{ padding:12px 15px 14px; border-top:1px solid #F3EFE8; }
+.upanel__foot[hidden]{ display:none; }
+
+/* --- a product row --- */
+.urow{
+  display:flex; align-items:flex-start; gap:11px;
+  padding:11px 0; border-bottom:1px solid #F5F1EA;
+}
+.urow:last-child{ border-bottom:0; }
+.urow__shot{ flex:0 0 auto; display:block; }
+.urow__shot img{
+  width:62px; height:62px; object-fit:cover; border-radius:9px; background:#F3EFE8;
+}
+.urow__text{ flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:1px; }
+.urow__name{
+  font-size:13px; font-weight:600; letter-spacing:-.012em; color:var(--ink);
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.urow__name:hover{ text-decoration:underline; text-underline-offset:2px; }
+.urow__var{
+  font-size:11.5px; color:#8A8780;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.urow__price{ margin-top:2px; font-size:13px; font-weight:700; color:var(--ink); }
+.urow__x{
+  flex:0 0 auto; display:grid; place-items:center; width:24px; height:24px;
+  border-radius:50%; color:#9A968E;
+  transition:background .18s var(--ease-out), color .18s var(--ease-out);
+}
+.urow__x:hover{ background:#F4F1EB; color:var(--ink); }
+.urow__x:focus-visible{ outline:2px solid var(--ink); outline-offset:1px; }
+.urow__x svg{ width:12px; height:12px; }
+
+.urow__qty{
+  display:inline-flex; align-items:center; gap:2px; margin-top:7px;
+  border:1px solid #E7E2D8; border-radius:8px; overflow:hidden; width:max-content;
+}
+.urow__qty button{
+  width:26px; height:26px; display:grid; place-items:center;
+  font-size:14px; font-weight:600; color:var(--ink);
+  transition:background .18s var(--ease-out);
+}
+.urow__qty button:hover{ background:#F7F4EE; }
+.urow__qty button:focus-visible{ outline:2px solid var(--ink); outline-offset:-2px; }
+.urow__qty span{ min-width:24px; text-align:center; font-size:12.5px; font-weight:600; }
+
+/* --- cart summary --- */
+.usum{ margin-bottom:11px; }
+.usum > div{ display:flex; align-items:baseline; justify-content:space-between; padding:3px 0; }
+.usum dt{ font-size:12.5px; color:#6E6C66; }
+.usum dd{ font-size:12.5px; font-weight:600; color:var(--ink); }
+.usum__total{ margin-top:5px; padding-top:8px !important; border-top:1px solid #F0ECE4; }
+.usum__total dt{ font-size:14px; font-weight:700; color:var(--ink); }
+.usum__total dd{ font-size:14px; font-weight:800; }
+
+/* --- buttons --- */
+.ubtn{
+  display:flex; align-items:center; justify-content:center; gap:7px;
+  width:100%; height:42px; border-radius:11px;
+  font-size:13px; font-weight:700; letter-spacing:-.01em;
+  transition:filter .18s var(--ease-out), background .18s var(--ease-out),
+             border-color .18s var(--ease-out), opacity .18s var(--ease-out);
+}
+.ubtn svg{ width:15px; height:15px; }
+.ubtn--primary{ background:var(--yellow); color:#1C1A16; }
+.ubtn--primary:hover{ filter:brightness(1.05); }
+.ubtn--ghost{ background:#fff; border:1px solid #E7E2D8; color:var(--ink); }
+.ubtn--ghost:hover{ border-color:#D5CCBB; background:#FCFBF8; }
+.ubtn--sm{ height:34px; font-size:12px; margin-bottom:4px; }
+.ubtn:focus-visible{ outline:2px solid var(--ink); outline-offset:2px; }
+.ubtn[disabled]{ opacity:.55; cursor:not-allowed; }
+.ubtn.is-busy{ cursor:progress; }
+
+/* --- account --- */
+.uwho{ display:flex; align-items:center; gap:10px; padding:10px 0 12px; }
+.uwho__av{
+  flex:0 0 auto; display:grid; place-items:center; width:38px; height:38px;
+  border-radius:50%; background:var(--yellow); color:#1C1A16;
+  font-size:15px; font-weight:800;
+}
+.uwho__text{ min-width:0; display:flex; flex-direction:column; }
+.uwho__name{
+  font-size:13.5px; font-weight:700; color:var(--ink);
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.uwho__sub{ font-size:11.5px; color:#8A8780; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.uwho__warn{ color:#B4443A; font-weight:600; }
+
+.umenu{ padding:4px 0 6px; }
+.umenu li + li{ margin-top:1px; }
+.umenu a, .umenu button{
+  display:flex; align-items:center; gap:11px; width:100%;
+  padding:9px 9px; border-radius:9px;
+  font-size:13px; font-weight:500; color:#3C3B36; text-align:left;
+  transition:background .18s var(--ease-out), color .18s var(--ease-out);
+}
+.umenu a:hover, .umenu button:hover{ background:#F8F5EF; color:var(--ink); }
+.umenu a:focus-visible, .umenu button:focus-visible{ outline:2px solid var(--ink); outline-offset:-2px; }
+.umenu svg{ width:19px; height:19px; flex:0 0 auto; color:#55534D; }
+.umenu span{ flex:1 1 auto; }
+.umenu__n{
+  flex:0 0 auto !important;
+  min-width:18px; height:18px; padding:0 5px;
+  display:grid; place-items:center;
+  border-radius:999px; background:var(--yellow); color:#1C1A16;
+  font-size:10px; font-weight:800;
+}
+.umenu--out{ border-top:1px solid #F3EFE8; padding-top:6px; }
+.umenu--out button{ color:#8A8780; }
+
+
+/* ============================================================
+   SIGN-IN DIALOG
+   ============================================================ */
+
+.is-auth-open{ overflow:hidden; }
+.uauth{ position:fixed; inset:0; z-index:300; }
+.uauth[hidden]{ display:none; }
+.uauth__scrim{
+  position:absolute; inset:0; background:rgba(28,24,16,.5);
+  -webkit-backdrop-filter:blur(3px); backdrop-filter:blur(3px);
+}
+.uauth__card{
+  position:relative;
+  width:min(392px,calc(100vw - 28px));
+  margin:clamp(40px,9vh,110px) auto 0;
+  padding:26px 26px 24px;
+  background:#fff; border-radius:18px;
+  box-shadow:0 40px 90px -36px rgba(30,24,12,.6);
+  max-height:86vh; overflow-y:auto;
+}
+.uauth__x{
+  position:absolute; top:12px; right:12px;
+  display:grid; place-items:center; width:30px; height:30px; border-radius:50%;
+  color:#9A968E;
+}
+.uauth__x:hover{ background:#F4F1EB; color:var(--ink); }
+.uauth__x svg{ width:14px; height:14px; }
+.uauth__card h2{ font-size:20px; font-weight:700; letter-spacing:-.025em; color:var(--ink); }
+.uauth__sub{ margin-top:5px; font-size:13px; line-height:1.5; color:#6E6C66; }
+.uauth__alt{ margin-top:11px; font-size:12.5px; color:#6E6C66; text-align:center; }
+.uauth__alt button{ font-weight:700; color:var(--ink); text-decoration:underline; text-underline-offset:3px; }
+
+.ufield{ margin-top:15px; }
+.ufield label{ display:block; margin-bottom:6px; font-size:12.5px; font-weight:600; color:var(--ink); }
+.ufield__wrap{ position:relative; }
+.ufield input{
+  width:100%; height:44px; padding:0 12px;
+  font:inherit; font-size:14px; color:var(--ink);
+  background:#fff; border:1px solid #E7E2D8; border-radius:10px;
+  transition:border-color .18s var(--ease-out), box-shadow .18s var(--ease-out);
+}
+.ufield input:focus{ outline:none; border-color:var(--ink); box-shadow:0 0 0 3px rgba(32,30,26,.07); }
+.ufield input.is-bad{ border-color:#D98B82; background:#FFF8F7; }
+.ufield__eye{
+  position:absolute; right:5px; top:50%; transform:translateY(-50%);
+  display:grid; place-items:center; width:34px; height:34px; border-radius:8px;
+  color:#9A968E;
+}
+.ufield__eye:hover{ background:#F6F3EE; color:var(--ink); }
+.ufield__eye.is-on{ color:var(--ink); }
+.ufield__eye:focus-visible{ outline:2px solid var(--ink); outline-offset:-2px; }
+.ufield__eye svg{ width:17px; height:17px; }
+.ufield input[type="password"], .ufield input[type="text"]{ padding-right:44px; }
+.ufield input[type="email"]{ padding-right:12px; }
+
+.uhint{ margin-top:6px; font-size:11.5px; color:#8A8780; }
+.uerr{ margin-top:6px; font-size:11.5px; line-height:1.45; font-weight:500; color:#B4443A; }
+.uerr[hidden]{ display:none; }
+.uerr--form{
+  margin-top:14px; padding:10px 12px; border-radius:10px;
+  background:#FDF1EF; border:1px solid #F0CEC8; color:#9C3A31; font-size:12.5px;
+}
+.uok{
+  margin-top:14px; padding:10px 12px; border-radius:10px;
+  background:#F3F7EF; border:1px solid #D7E4CA; color:#3F5C33;
+  font-size:12.5px; line-height:1.5;
+}
+.uok[hidden]{ display:none; }
+.uauth__card .ubtn{ margin-top:16px; }
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width:620px){
+  .upanel,
+  .upanel--wish,
+  .upanel--account{
+    position:fixed; left:10px; right:10px; top:auto; bottom:10px;
+    width:auto; max-height:78vh;
+    transform:translateY(8px); border-radius:18px;
+  }
+  .upanel.is-on,
+  .upanel--account.is-on{ transform:translateY(0); }
+  .uauth__card{ margin-top:14px; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .upanel, .uact, .ubtn, .urow__x, .umenu a, .umenu button{ transition:none; }
+  .upanel{ transform:none !important; }
+}
+
+
+/* ============================================================
+   WISHLIST PAGE
+   ============================================================ */
+
+body.wish-page{ background:#FBF9F5; }
+
+.wishpage{ padding:clamp(26px,3vw,56px) clamp(16px,2.08vw,34px) clamp(48px,5vw,88px); }
+.wishpage__inner{ max-width:1320px; margin:0 auto; }
+.wishpage__head{ margin-bottom:clamp(18px,1.8vw,30px); }
+.wishpage__eyebrow{
+  font-size:clamp(10px,.74vw,12px); font-weight:700;
+  letter-spacing:.17em; text-transform:uppercase; color:#6B6A64;
+}
+.wishpage__title{
+  margin-top:7px; font-size:clamp(28px,2.7vw,42px); font-weight:700;
+  letter-spacing:-.032em; color:var(--ink);
+}
+.wishpage__title em{ font-style:normal; color:var(--yellow); }
+.wishpage__count{ margin-top:6px; font-size:13px; color:#6E6C66; }
+
+.wish-page .grid[hidden]{ display:none; }
+.wish-page .pc__shot{ display:block; }
+.wish-page .pc__var{ font-size:11.5px; color:#8A8780; margin-top:-2px; }
+.wish-page .pc__name a{ color:inherit; }
+.wish-page .pc__name a:hover{ text-decoration:underline; text-underline-offset:2px; }
+.wish-page .pc__wish.is-on{ background:var(--yellow); color:#1C1A16; }
+
+.wishpage__empty{
+  padding:clamp(44px,6vw,86px) 20px; text-align:center;
+  border:1px dashed #E6E0D4; border-radius:16px; background:#fff;
+}
+.wishpage__empty[hidden]{ display:none; }
+.wishpage__empty p{ font-size:17px; font-weight:700; color:var(--ink); }
+.wishpage__sub{ margin-top:6px; font-size:13.5px !important; font-weight:400 !important; color:#6E6C66 !important; }
+.wishpage__cta{ display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-top:20px; }
+
+
+/* --- unverified-email prompt inside the account panel --- */
+.uverify{
+  margin:2px 0 10px; padding:11px 12px;
+  background:#FDF8EA; border:1px solid #F0E3BE; border-radius:11px;
+}
+.uverify__t{ font-size:11.5px; line-height:1.45; color:#6B5A24; }
+.uverify__row{ display:flex; gap:7px; margin-top:9px; }
+.uverify__row .ubtn{ flex:1 1 0; margin-bottom:0; }
+
+
+/* ============================================================
+   FLOATING WHATSAPP
+   ============================================================ */
+
+.wa{
+  position:fixed; z-index:150;
+  right:clamp(14px,1.6vw,26px);
+  bottom:calc(clamp(14px,1.6vw,26px) + env(safe-area-inset-bottom, 0px));
+  display:grid; place-items:center;
+  width:clamp(48px,3.6vw,56px); aspect-ratio:1; border-radius:50%;
+  background:#25D366; color:#fff;
+  box-shadow:0 8px 22px -8px rgba(18,120,60,.55);
+  transition:transform .2s var(--ease-soft), box-shadow .2s var(--ease-soft);
+}
+.wa:hover{ transform:translateY(-2px); box-shadow:0 12px 28px -8px rgba(18,120,60,.65); }
+.wa:focus-visible{ outline:2px solid var(--ink); outline-offset:3px; }
+.wa svg{ position:relative; width:58%; height:58%; }
+
+.wa__halo{
+  position:absolute; inset:0; border-radius:50%;
+  background:#25D366; opacity:.55;
+  animation:wa-pulse 2.4s var(--ease-out) infinite;
+}
+@keyframes wa-pulse{
+  0%   { transform:scale(1);    opacity:.5; }
+  70%  { transform:scale(1.55); opacity:0; }
+  100% { transform:scale(1.55); opacity:0; }
+}
+
+/* clear of the filters sheet and the panel sheets on a phone */
+@media (max-width:620px){
+  .wa{ bottom:calc(84px + env(safe-area-inset-bottom, 0px)); }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .wa__halo{ animation:none; opacity:.28; }
+  .wa{ transition:none; }
+  .wa:hover{ transform:none; }
+}
+
+
+/* ============================================================
+   SHARED HERO ZOOM — hero photography only, never product imagery
+   ============================================================ */
+
+/* One shared drift for every hero on the site. Each hero declares the scale
+   it already sits at, because the home hero rests at 1.03 to leave headroom
+   for its parallax — starting it from 1 would make the photo jump. */
+@keyframes hero-drift{
+  from{ transform:scale(var(--z0,1)); }
+  to  { transform:scale(var(--z1,1.05)); }
+}
+
+.fhero__media img, .phero__img, .ab-hero__img{
+  animation:hero-drift 10s var(--ease-soft) forwards;
+  transform-origin:50% 55%;
+  will-change:transform;
+}
+
+/* The home hero animates the same property on entry (scale 1.13 -> 1.03), so
+   the drift waits for that settle to finish and picks up where it lands
+   rather than cancelling it. */
+.js .hero.is-ready .hero__img{
+  --z0:1.03; --z1:1.08;
+  animation:hero-drift 10s var(--ease-soft) 1.7s forwards;
+  transform-origin:50% 50%;
+}
+/* without JS there is no entrance to wait for */
+html:not(.js) .hero__img{
+  --z0:1.03; --z1:1.08;
+  animation:hero-drift 10s var(--ease-soft) forwards;
+}
+
+/* the containers already clip, so nothing can spill or shift the layout */
+.hero, .fhero, .phero, .ab-hero{ overflow:hidden; }
+
+@media (prefers-reduced-motion: reduce){
+  .fhero__media img, .phero__img, .ab-hero__img,
+  .js .hero.is-ready .hero__img, html:not(.js) .hero__img{ animation:none; }
+}

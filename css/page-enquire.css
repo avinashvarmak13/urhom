@@ -1,0 +1,205 @@
+/* ============================================================
+   URHOM — enquiry page
+   Builds on css/page-furnishing.css for the header and footer shell.
+   ============================================================ */
+
+body.enquire-page{ background:#FBF9F5; }
+
+.enq{ padding:clamp(28px,3.4vw,64px) clamp(16px,2.08vw,34px) clamp(48px,5vw,88px); }
+.enq__inner{
+  display:grid;
+  grid-template-columns:minmax(0,0.78fr) minmax(0,1fr);
+  gap:clamp(24px,3.4vw,64px);
+  max-width:1180px; margin:0 auto;
+  align-items:start;
+}
+
+/* ---------------- left column ---------------- */
+
+.enq__eyebrow{
+  font-size:clamp(10px,.74vw,12px); font-weight:700;
+  letter-spacing:.17em; text-transform:uppercase; color:#6B6A64;
+}
+.enq__title{
+  margin-top:clamp(8px,.7vw,14px);
+  font-size:clamp(32px,3.2vw,52px); font-weight:700; line-height:1.04;
+  letter-spacing:-.034em; color:var(--ink);
+}
+.enq__title em{ font-style:normal; color:var(--yellow); }
+.enq__lede{
+  margin-top:clamp(12px,1vw,18px); max-width:38ch;
+  font-size:clamp(13.5px,.95vw,16px); line-height:1.6; color:#55544E;
+}
+
+.enq__points{ margin-top:clamp(24px,2.2vw,38px); display:grid; gap:clamp(14px,1.3vw,22px); }
+.enq__points li{ padding-left:14px; border-left:2px solid var(--yellow); }
+.enq__points h2{
+  font-size:clamp(13px,.92vw,15px); font-weight:700; letter-spacing:-.014em; color:var(--ink);
+}
+.enq__points p{ margin-top:3px; font-size:clamp(12.5px,.88vw,14px); line-height:1.5; color:#6B6A64; }
+
+.enq__direct{
+  margin-top:clamp(22px,2vw,34px); padding:clamp(14px,1.2vw,20px);
+  background:#fff; border:1px solid #ECE8E1; border-radius:14px;
+}
+.enq__direct-t{ font-size:12px; font-weight:700; color:var(--ink); margin-bottom:7px; }
+.enq__direct p{ font-size:13.5px; line-height:1.7; }
+.enq__direct a{ color:var(--ink); font-weight:600; }
+.enq__direct a:hover{ text-decoration:underline; }
+.enq__direct-s{ color:var(--ink-mute); font-size:12.5px !important; margin-top:3px; }
+
+/* ---------------- form ---------------- */
+
+.enq__form{
+  background:#fff; border:1px solid #EFEBE4; border-radius:20px;
+  padding:clamp(22px,2.2vw,40px);
+  box-shadow:0 24px 60px -40px rgba(50,40,24,.38);
+}
+
+.field{ margin-bottom:clamp(16px,1.5vw,24px); }
+
+.field > label,
+.field > legend{
+  display:block; margin-bottom:6px;
+  font-size:13px; font-weight:600; letter-spacing:-.012em; color:var(--ink);
+}
+fieldset.field{ border:0; padding:0; }
+.opt{ font-weight:400; font-size:11.5px; color:#A09C94; margin-left:5px; }
+
+.field input[type="text"],
+.field input[type="email"],
+.field input[type="tel"],
+.field select,
+.field textarea{
+  width:100%; padding:0 12px;
+  height:42px;
+  font:inherit; font-size:14px; color:var(--ink);
+  background:#fff; border:1px solid #E7E2D8; border-radius:10px;
+  transition:border-color var(--t-fast) var(--ease-out), background var(--t-fast) var(--ease-out),
+             box-shadow var(--t-fast) var(--ease-out);
+}
+.field textarea{ height:auto; padding:11px 12px; line-height:1.55; resize:vertical; min-height:108px; }
+.field select{ appearance:none; cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='m6 9 6 6 6-6' stroke='%238A8780' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right 11px center; background-size:16px;
+  padding-right:34px;
+}
+.field input::placeholder, .field textarea::placeholder{ color:#A8A49C; }
+.field input:focus, .field select:focus, .field textarea:focus{
+  outline:none; background:#fff; border-color:var(--ink);
+  box-shadow:0 0 0 3px rgba(32,30,26,.07);
+}
+
+/* validity states */
+.field.is-bad input, .field.is-bad select, .field.is-bad textarea,
+.field.is-bad .phone{ border-color:#D98B82; background:#FFF8F7; }
+.field.is-bad input:focus, .field.is-bad select:focus, .field.is-bad textarea:focus{
+  box-shadow:0 0 0 3px rgba(190,70,55,.16);
+}
+.field.is-ok input, .field.is-ok select, .field.is-ok textarea{ border-color:#CFD9C6; }
+
+.err{
+  margin-top:5px; font-size:11.5px; line-height:1.4; font-weight:500; color:#B4443A;
+  display:flex; gap:5px;
+}
+.err[hidden]{ display:none; }
+.err::before{ content:"!"; flex:0 0 auto; display:inline-grid; place-items:center;
+  width:13px; height:13px; margin-top:1px; border-radius:50%;
+  background:#B4443A; color:#fff; font-size:9px; font-weight:800; }
+
+/* phone, with a fixed country code */
+.phone{
+  display:flex; align-items:center;
+  background:#fff; border:1px solid #E7E2D8; border-radius:10px;
+  transition:border-color var(--t-fast) var(--ease-out), box-shadow var(--t-fast) var(--ease-out);
+}
+.phone:focus-within{ background:#fff; border-color:var(--ink); box-shadow:0 0 0 3px rgba(32,30,26,.07); }
+.phone__cc{
+  flex:0 0 auto; padding:0 9px 0 12px;
+  font-size:14px; font-weight:600; color:var(--ink-mute);
+  border-right:1px solid #E8E3DB; line-height:40px;
+}
+.phone input{ border:0 !important; background:none !important; box-shadow:none !important; padding-left:10px; }
+
+/* interest cards — big enough to be an easy first tap */
+.pickers{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:9px; }
+.picker{ position:relative; cursor:pointer; }
+.picker input{ position:absolute; opacity:0; width:0; height:0; }
+.picker span{
+  display:flex; align-items:center; justify-content:center;
+  min-height:48px; padding:10px 14px; border-radius:12px;
+  background:#fff; border:1px solid #E7E2D8; color:#45443F;
+  font-size:13.5px; font-weight:600; letter-spacing:-.012em; text-align:center;
+  transition:border-color .15s var(--ease-out), background .15s var(--ease-out),
+             color .15s var(--ease-out), box-shadow .15s var(--ease-out);
+}
+.picker:hover span{ border-color:#D7CFBF; }
+.picker input:checked + span{
+  background:var(--yellow); border-color:var(--yellow); color:var(--ink);
+  box-shadow:0 3px 12px -7px rgba(170,125,0,.6);
+}
+.picker input:focus-visible + span{ outline:2px solid var(--ink); outline-offset:2px; }
+fieldset.field.is-bad .picker span{ border-color:#D98B82; }
+
+.counter{ margin-top:6px; font-size:11px; color:#A5A29B; text-align:right; }
+.counter.is-near{ color:#B4443A; font-weight:600; }
+
+.hp{ position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
+
+.enq__error{
+  margin:clamp(10px,1vw,16px) 0 0;
+  padding:10px 13px; border-radius:10px;
+  background:#FDF1EF; border:1px solid #F0CEC8; color:#9C3A31;
+  font-size:12.5px; font-weight:600;
+}
+.enq__error[hidden]{ display:none; }
+
+.enq__submit{ width:100%; justify-content:center; margin-top:clamp(16px,1.5vw,24px); }
+.enq__submit[disabled]{ opacity:.6; cursor:progress; }
+.enq__submit.is-busy .btn__arrow{ display:none; }
+.enq__note{
+  margin-top:11px; font-size:11.5px; line-height:1.5; color:var(--ink-mute); text-align:center;
+}
+
+/* ---------------- success ---------------- */
+
+.enq__done{
+  grid-column:2;
+  align-self:start;
+  background:#fff; border:1px solid #ECE8E1; border-radius:18px;
+  padding:clamp(24px,2.4vw,40px); text-align:center;
+  box-shadow:0 20px 50px -34px rgba(50,40,24,.4);
+}
+.enq__done[hidden]{ display:none; }
+.enq__done:focus{ outline:none; }
+.enq__tick{
+  display:grid; place-items:center; width:52px; height:52px; margin:0 auto;
+  border-radius:50%; background:var(--yellow); color:var(--ink);
+}
+.enq__tick svg{ width:26px; height:26px; }
+.enq__done h2{
+  margin-top:16px; font-size:clamp(20px,1.6vw,26px); font-weight:700;
+  letter-spacing:-.022em; color:var(--ink);
+}
+.enq__done p{
+  margin-top:9px; font-size:13.5px; line-height:1.6; color:#55544E;
+  max-width:46ch; margin-inline:auto;
+}
+.enq__done-cta{
+  display:flex; flex-wrap:wrap; justify-content:center; gap:10px;
+  margin-top:clamp(18px,1.6vw,26px);
+}
+.enq__again{
+  display:block; margin:16px auto 0;
+  font-size:12.5px; font-weight:600; color:var(--ink-mute);
+}
+.enq__again:hover{ color:var(--ink); text-decoration:underline; }
+
+@media (max-width:900px){
+  .enq__inner{ grid-template-columns:1fr; }
+  .enq__done{ grid-column:1; }
+  .enq__lede{ max-width:none; }
+}
+@media (max-width:560px){
+  .pickers{ grid-template-columns:1fr 1fr; }
+}

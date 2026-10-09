@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projects | URHOM</title>
+<meta name="description" content="Beautiful homes, inspiring offices and vibrant commercial spaces — see how URHOM brings interiors to life across India.">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/webp" href="assets/logo-mark.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" type="image/webp" fetchpriority="high" imagesrcset="assets/projects/hero-residence-sm.webp 1100w, assets/projects/hero-residence.webp 2172w"
+      imagesizes="100vw" href="assets/projects/hero-residence.webp">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/site-nav.css">
+<!-- the collection-page shell (header, hero, strip, filters, grid) is shared
+     with furnishing.html; page-collection.css adds what the catalogue pages
+     have in common on top of it -->
+<link rel="stylesheet" href="css/page-furnishing.css">
+<link rel="stylesheet" href="css/page-collection.css">
+<link rel="stylesheet" href="css/page-projects.css">
+<link rel="stylesheet" href="css/panels.css">
+<link rel="stylesheet" href="css/hover.css">
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body class="shop-page projects-page">
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ===================== HEADER ===================== -->
+<header class="shop-header">
+  <div class="shop-header__inner">
+    <a class="brand" href="index.html" aria-label="URHOM — home">
+      <picture><source type="image/webp" srcset="assets/logo-mark.webp"><img class="brand__mark" src="assets/logo-mark.png" alt="" width="256" height="256"></picture>
+      <span class="brand__name">URHOM</span>
+    </a>
+
+    <nav class="shop-nav" aria-label="Primary">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="furniture.html">Furniture</a></li>
+        <li><a href="furnishing.html">Furnishing</a></li>
+        <li><a href="interiors.html">Interiors</a></li>
+        <li><a class="is-active" href="projects.html" aria-current="page">Projects</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+
+    <form class="shop-search" role="search" data-search-form>
+      <label class="u-sr-only" for="shop-q">Search interiors</label>
+      <input id="shop-q" type="search" placeholder="Search for projects, spaces, products…" data-search autocomplete="off">
+      <button type="submit" aria-label="Search">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="6.6" stroke="currentColor" stroke-width="1.7"/><path d="M16.1 16.1 20.4 20.4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      </button>
+    </form>
+
+    <div class="shop-actions">
+      <div class="uactions" data-uactions></div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ===================== HERO ===================== -->
+  <section class="phero" aria-label="Our projects">
+    <div class="phero__media" data-phero-media aria-hidden="true"></div>
+
+    <div class="phero__inner">
+      <div class="phero__copy">
+        <p class="phero__eyebrow">Our Projects</p>
+        <h1 class="phero__title">Real spaces.<br>Real stories<em>.</em></h1>
+        <p class="phero__lede">Beautiful homes, inspiring offices and vibrant commercial<br>spaces — all brought to life with URHOM.</p>
+        <a class="btn btn--primary btn--lg" href="#featured" data-scroll>
+          <span class="btn__label">Explore Our Projects</span>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <ul class="pcaps" data-phero-caps></ul>
+      </div>
+
+      <div class="phero__side">
+        <a class="pfeat" href="#featured" data-phero-card data-scroll>
+          <span class="pfeat__text">
+            <span class="pfeat__type" data-phero-type></span>
+            <span class="pfeat__city" data-phero-city></span>
+            <span class="pfeat__line" data-phero-line></span>
+          </span>
+          <span class="pfeat__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+        <div class="phero__nav">
+          <button class="circ" type="button" data-phero-prev aria-label="Previous project">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 12H5M11 6l-6 6 6 6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <span class="phero__count"><b data-phero-i>01</b> / <span data-phero-n>05</span></span>
+          <button class="circ" type="button" data-phero-next aria-label="Next project"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================ CATEGORY STRIP ================ -->
+  <nav class="catstrip catstrip--proj" aria-label="Project categories" data-pcats></nav>
+
+  <!-- ================ FEATURED PROJECTS ============== -->
+  <section class="pfeatured" id="featured" aria-labelledby="featured-h">
+    <div class="pfeatured__head">
+      <div>
+        <p class="psection__eyebrow">Featured Projects</p>
+        <h2 class="psection__title" id="featured-h">Spaces designed for real life<em>.</em></h2>
+      </div>
+      <p class="pfeatured__sub">From compact apartments to large commercial spaces,
+        explore how URHOM turns ideas into beautifully functional environments.</p>
+    </div>
+
+    <p class="pnote" data-pnote hidden></p>
+    <div class="pmason" data-pgrid></div>
+    <p class="pempty" data-pempty hidden>No projects in this category yet.
+      <button type="button" data-pcat-all>Show all projects</button></p>
+  </section>
+
+  <!-- =================== STATISTICS ================== -->
+  <section class="pstats" aria-label="URHOM in numbers" data-pstats></section>
+
+  <!-- ================== OUR APPROACH ================= -->
+  <section class="papproach" id="approach" aria-labelledby="approach-h">
+    <div class="papproach__copy">
+      <p class="psection__eyebrow">Our Approach</p>
+      <h2 class="psection__title" id="approach-h">From vision<br>to reality<em>.</em></h2>
+      <p class="papproach__sub">A seamless journey, with you at every step.</p>
+      <a class="btn btn--ghost btn--sm" href="index.html#section-05">
+        <span class="btn__label">Know Our Process</span>
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <ol class="psteps2" data-psteps></ol>
+  </section>
+
+  <!-- ================= CLIENT STORIES ================ -->
+  <section class="pstories" aria-labelledby="stories-h">
+    <div class="pstories__copy">
+      <p class="psection__eyebrow">Client Stories</p>
+      <h2 class="psection__title" id="stories-h">What our<br>clients say<em>.</em></h2>
+      <div class="pstories__nav">
+        <button class="circ" type="button" data-tprev aria-label="Previous testimonials">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 12H5M11 6l-6 6 6 6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="circ" type="button" data-tnext aria-label="More testimonials"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+    <div class="trail" data-trail tabindex="0" role="group" aria-label="Client stories, scrollable"></div>
+  </section>
+
+  <!-- ==================== CLOSING CTA ================ -->
+  <section class="pcta" aria-labelledby="cta-h">
+    <div class="pcta__media" data-pcta-media aria-hidden="true"></div>
+    <div class="pcta__inner">
+      <div>
+        <h2 class="pcta__title" id="cta-h">Let's create<br>your dream space<em>.</em></h2>
+        <p class="pcta__sub">Book a consultation and take the first step<br>towards a more beautiful, functional space.</p>
+      </div>
+      <a class="btn btn--primary btn--lg" href="enquire.html">
+        <span class="btn__label">Book a Free Consultation</span>
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============== PROJECT DETAIL DIALOG ============ -->
+  <div class="pmodal" data-pmodal hidden>
+    <div class="pmodal__scrim" data-pmodal-close></div>
+    <div class="pmodal__card" role="dialog" aria-modal="true" aria-labelledby="pmodal-h" tabindex="-1" data-pmodal-card>
+      <button class="pmodal__x" type="button" data-pmodal-close aria-label="Back to all projects">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
+      </button>
+      <div data-pmodal-body></div>
+    </div>
+  </div>
+</main>
+
+<footer class="shop-foot">
+  <p>&copy; 2026 URHOM. All rights reserved.</p>
+  <p><a href="index.html">Back to the main site</a></p>
+</footer>
+
+<script src="js/catalog.js"></script>
+<script src="js/store.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/site.js"></script>
+<script src="js/panels.js"></script>
+<script src="js/projects-data.js"></script>
+<script src="js/projects.js"></script>
+<script src="js/whatsapp.js"></script>
+</body>
+</html>

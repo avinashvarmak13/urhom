@@ -1,0 +1,234 @@
+/* ============================================================
+   URHOM — base
+   Tokens, reset, shared primitives, shared motion.
+   Section styles live in css/section-*.css
+   ============================================================ */
+
+:root{
+  /* ---- design reference: 1774 x 887 artboard ---- */
+  --design-w: 1774;
+
+  /* ---- brand ---- */
+  --yellow:        #FFC400;
+  --yellow-soft:   #FFD24A;
+  --yellow-deep:   #F2B400;
+
+  --ink:           #121212;   /* headings */
+  --ink-soft:      #3F3F3D;   /* nav links */
+  --ink-mute:      #5A5A58;   /* body copy on white surfaces */
+  --ink-faint:     #9B9B99;   /* rail inactive / scroll label, on white */
+  --hair:          #C9C9C6;   /* 1px rules */
+
+  /* Copy that sits directly on photography needs more weight than copy on a
+     white panel: the same grey that reads at 6.7:1 on #fff collapses to ~2.3:1
+     over a sunlit interior. These are the same hues, stepped darker. */
+  --ink-photo:       #2E2E2C;   /* body copy over a photo */
+  --ink-photo-soft:  #4A4945;   /* eyebrows / labels over a photo */
+  --ink-photo-faint: #6A6A66;   /* rail inactive / scroll label over a photo */
+
+  /* At .80 the hero photograph showed through the right half of the pill,
+     so the bar read as two strips rather than one white header once the
+     wishlist/account/cart group was added to it. */
+  --pill-bg:       rgba(255,255,255,.94);
+  --pill-border:   rgba(255,255,255,.66);
+
+  /* ---- warm-white glass ----
+     The surface language already used by the stats panel, promoted to tokens
+     so the benefits panel and the hero copy wash share one recipe. Warm, not
+     pure white, so it sits inside the #FAF8F5 family rather than on top of it. */
+  --glass-tint:    253,250,245;
+  --glass:         rgba(var(--glass-tint),.76);  /* panels over busy photography */
+  --glass-soft:    rgba(var(--glass-tint),.62);  /* panels over calmer ground */
+  --glass-edge:    rgba(255,255,255,.72);
+  --glass-radius:  clamp(20px,1.75vw,34px);
+  --glass-blur:    blur(16px) saturate(1.16);
+  --glass-shadow:  0 10px 34px -22px rgba(50,40,24,.34);
+
+  /* ---- layout ----
+     Three content gutters, one per section family. Every section used to
+     hand-roll its own value (4.2 / 6.37 / 6.8 / 8.6 / 8.74vw), which is why
+     the left edges did not line up down the page. */
+  --gutter:        11.78vw;   /* 209 / 1774  — hero only, per the reference */
+  --gutter-wide:    8.68vw;   /* 154 / 1774  — full-bleed photo sections 03/05/06 */
+  --gutter-rail:    6.37vw;   /* 113 / 1774  — copy-column + card-rail sections 02/04 */
+  --rail-x:         3.05vw;   /*  54 / 1774  — section index rail centre */
+
+  /* ---- motion ---- */
+  --ease-out:      cubic-bezier(.22,.61,.36,1);
+  --ease-soft:     cubic-bezier(.33,1,.68,1);
+  --ease-swift:    cubic-bezier(.4,0,.2,1);
+  --t-fast:        .22s;
+  --t-med:         .38s;
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+
+html{
+  -webkit-text-size-adjust:100%;
+  scroll-behavior:auto;           /* Lenis owns scrolling */
+}
+
+body{
+  margin:0;
+  background:#fff;
+  color:var(--ink);
+  font-family:"Figtree",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  font-weight:400;
+  font-synthesis-weight:none;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+
+img,svg{ display:block; max-width:100%; }
+/* <picture> is only a format switch — it must not become a layout box */
+picture{ display:contents; }
+ul,ol{ margin:0; padding:0; list-style:none; }
+h1,h2,h3,p{ margin:0; }
+a{ color:inherit; text-decoration:none; }
+button{ font:inherit; color:inherit; background:none; border:0; padding:0; cursor:pointer; }
+
+:focus-visible{
+  outline:2px solid var(--ink);
+  outline-offset:3px;
+  border-radius:4px;
+}
+
+.skip-link{
+  position:fixed; top:-100px; left:16px; z-index:200;
+  padding:10px 16px; border-radius:999px;
+  background:var(--ink); color:#fff; font-size:14px; font-weight:600;
+  transition:top var(--t-fast) var(--ease-out);
+}
+.skip-link:focus-visible{ top:16px; }
+
+/* Lenis */
+html.lenis,html.lenis body{ height:auto; }
+.lenis.lenis-smooth{ scroll-behavior:auto !important; }
+.lenis.lenis-stopped{ overflow:hidden; }
+
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+
+.btn{
+  position:relative;
+  display:inline-flex; align-items:center; justify-content:center;
+  gap:.66em;
+  border-radius:999px;
+  font-weight:700;
+  letter-spacing:-.005em;
+  white-space:nowrap;
+  isolation:isolate;
+  transform:translateZ(0);
+  transition:transform var(--t-med) var(--ease-soft),
+             box-shadow var(--t-med) var(--ease-soft);
+}
+
+/* The quiet counterpart to .btn--primary: same geometry, no fill.
+   Shared by the Projects page, the wishlist empty state, the enquiry
+   confirmation and the account panels — it had been used in all four
+   before it existed here. */
+.btn--ghost{
+  background:#fff;
+  color:var(--ink);
+  border:1px solid rgba(24,22,18,.18);
+  box-shadow:0 1px 2px rgba(60,45,0,.05);
+}
+.btn--ghost:hover{
+  border-color:rgba(24,22,18,.34);
+  background:#FCFBF8;
+}
+.btn--ghost:focus-visible{ outline:2px solid var(--ink); outline-offset:2px; }
+
+.btn--primary{
+  background:var(--yellow);
+  color:var(--ink);
+  box-shadow:0 1px 2px rgba(60,45,0,.10);
+}
+/* hover wash sits above the fill, below the label */
+.btn--primary::after{
+  content:""; position:absolute; inset:0; z-index:-1;
+  border-radius:inherit;
+  background:var(--yellow-soft);
+  opacity:0;
+  transition:opacity var(--t-med) var(--ease-soft);
+}
+.btn--primary:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 26px -8px rgba(185,135,0,.48);
+}
+.btn--primary:hover::after{ opacity:1; }
+.btn--primary:active{ transform:translateY(0); transition-duration:.08s; }
+
+.btn__label{ position:relative; z-index:1; }
+
+.btn__arrow{
+  position:relative; z-index:1;
+  width:1.18em; height:1.18em;
+  flex:0 0 auto;
+  transition:transform var(--t-med) var(--ease-soft);
+}
+.btn:hover .btn__arrow{ transform:translateX(4px); }
+
+/* sizes — ratios taken from the reference artboard */
+.btn--sm{                                   /* 176 x 48 @1774 */
+  height:clamp(40px,2.71vw,52px);
+  padding-inline:clamp(16px,1.69vw,32px);
+  font-size:clamp(13px,.874vw,17px);
+}
+.btn--lg{                                   /* 267 x 50 @1774 */
+  height:clamp(48px,2.82vw,56px);
+  padding-inline:clamp(22px,1.96vw,37px);
+  font-size:clamp(14px,.874vw,17px);
+}
+
+
+/* ============================================================
+   SHARED ENTRANCE MOTION
+   Elements opt in with [data-reveal]; .is-revealed is set by
+   js/reveal.js (or immediately, if JS never boots).
+   ============================================================ */
+
+[data-reveal]{ --d:0ms; }
+
+.js [data-reveal="up"],
+.js [data-reveal="header"]{
+  opacity:0;
+  transform:translate3d(0,14px,0);
+  transition:opacity .72s var(--ease-out) var(--d),
+             transform .82s var(--ease-out) var(--d);
+  will-change:opacity,transform;
+}
+.js [data-reveal="header"]{ transform:translate3d(0,-16px,0); }
+
+.js [data-reveal="up"].is-revealed,
+.js [data-reveal="header"].is-revealed{
+  opacity:1; transform:none;
+}
+
+/* masked line reveal */
+.line{ display:block; overflow:hidden; padding-bottom:.04em; }
+.line__in{ display:block; }
+.js [data-reveal="line"] .line__in{
+  transform:translate3d(0,108%,0);
+  transition:transform .95s var(--ease-out) var(--d);
+  will-change:transform;
+}
+.js [data-reveal="line"].is-revealed .line__in{ transform:none; }
+
+/* each element drops will-change when its own transition ends, so the layers
+   are torn down a few at a time instead of all at once (see js/reveal.js) */
+[data-reveal].is-settled{ will-change:auto; }
+
+@media (prefers-reduced-motion: reduce){
+  .js [data-reveal]{ opacity:1 !important; transform:none !important; transition:none !important; }
+  .js [data-reveal] .line__in{ transform:none !important; transition:none !important; }
+  *,*::before,*::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+  }
+}

@@ -1,0 +1,390 @@
+/* ============================================================
+   URHOM — SECTION 01 / HERO
+   Reference geometry @1774 x 887 artboard:
+     content left edge   x 209   → 11.78vw
+     eyebrow             y 245,  cap height 10   (≈14px type)
+     headline            y 285–515, 3 lines, ≈80px / 88px leading
+     lede                y 520–604, 3 lines, ≈19px / 27px leading
+     CTA pill            209 → 476, h 50
+     rail                centred on x 54
+     scroll cue          centred on x 85, ends y 833
+   ============================================================ */
+
+.hero{
+  position:relative;
+  min-height:100vh;
+  min-height:100svh;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+  background:#f4f2ef;
+  isolation:isolate;
+}
+
+/* ---------------- media ---------------- */
+
+.hero__media{
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  overflow:hidden;
+}
+
+.hero__media-inner{
+  position:absolute;
+  inset:0;
+  will-change:transform;
+}
+
+.hero__img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:50% 52%;
+  transform:scale(1.03);              /* headroom for the parallax travel */
+  transform-origin:50% 50%;
+}
+
+/* Readability scrim.
+   The copy column is the left ~46vw; the lede sits lowest and over the
+   busiest part of the frame (foliage + city), so a second, softer pool is
+   anchored there rather than lifting the whole image. Peak alpha stays at
+   .50 so the photograph still reads as a photograph. */
+.hero__media::after{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    /* a warm pool centred on the lede, which is the line that sits lowest and
+       over the busiest part of the frame (foliage, then city) */
+    radial-gradient(74% 42% at 6% 68%,
+      rgba(var(--glass-tint),.80) 0%,
+      rgba(var(--glass-tint),.62) 32%,
+      rgba(var(--glass-tint),.34) 56%,
+      rgba(var(--glass-tint),.10) 78%,
+      rgba(var(--glass-tint),0)   94%),
+    /* and a gentle column wash so the eyebrow, headline and CTA sit on the
+       same warm ground instead of the paragraph looking like a patch */
+    linear-gradient(99deg,
+      rgba(var(--glass-tint),.58) 0%,
+      rgba(var(--glass-tint),.46) 16%,
+      rgba(var(--glass-tint),.30) 30%,
+      rgba(var(--glass-tint),.14) 42%,
+      rgba(var(--glass-tint),.04) 52%,
+      rgba(var(--glass-tint),0)   62%);
+}
+
+/* entrance: a slow settle, no bounce */
+.js .hero__img{
+  transform:scale(1.13);
+  opacity:.001;
+  transition:transform 1.6s var(--ease-soft),
+             opacity .9s var(--ease-out);
+}
+.js .hero.is-ready .hero__img{
+  transform:scale(1.03);
+  opacity:1;
+}
+
+/* ---------------- content ---------------- */
+
+.hero__inner{
+  width:100%;
+  padding-left:var(--gutter);
+  padding-right:clamp(24px,6vw,96px);
+  padding-top:clamp(84px,6.3vw,118px);  /* clears the floating header */
+  padding-bottom:clamp(90px,5.5vw,124px);
+}
+
+.hero__content{ max-width:min(46vw,820px); }
+
+.hero__eyebrow{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:clamp(8px,.62vw,13px);
+  font-size:clamp(10.5px,.874vw,16px);  /* 15.5 / 1774 */
+  font-weight:600;
+  letter-spacing:.155em;
+  text-transform:uppercase;
+  color:var(--ink-photo-soft);
+}
+.hero__eyebrow i{
+  font-style:normal;
+  font-size:1.1em;
+  line-height:1;
+  color:#8C8B86;
+  transform:translateY(-.04em);
+}
+
+.hero__title{
+  margin-top:clamp(12px,1.24vw,24px);
+  font-size:clamp(37px,4.17vw,84px);    /* 74 / 1774 */
+  font-weight:600;
+  line-height:.95;                      /* 73px pitch incl. the mask padding */
+  letter-spacing:-.03em;
+  color:var(--ink);
+}
+.hero__title em{
+  font-style:normal;
+  color:var(--yellow);
+}
+
+.hero__lede{
+  margin-top:clamp(14px,1.24vw,24px);
+  font-size:clamp(14.5px,1.127vw,22px); /* 20 / 1774 */
+  font-weight:400;
+  line-height:1.4;                      /* 28 / 20 */
+  letter-spacing:-.004em;
+  color:var(--ink-photo);
+  max-width:34ch;
+}
+
+.hero__cta{ margin-top:clamp(22px,1.3vw,26px); }
+
+
+/* ============================================================
+   SECTION INDEX RAIL
+   ============================================================ */
+
+.rail{
+  position:fixed;
+  left:var(--rail-x);
+  top:46.5%;
+  transform:translate(-50%,-50%);
+  z-index:40;
+}
+
+/* The rail is fixed, so it crosses every section — including bright sky and
+   dark foliage. A soft column of light travels with it so the numbers keep
+   their contrast without being boxed in. */
+.rail::before{
+  content:"";
+  position:absolute;
+  left:50%; top:50%;
+  width:150px; height:118%;
+  transform:translate(-50%,-50%);
+  border-radius:999px;
+  background:radial-gradient(50% 50% at 50% 50%,
+    rgba(var(--glass-tint),.42) 0%,
+    rgba(var(--glass-tint),.26) 46%,
+    rgba(var(--glass-tint),.08) 72%,
+    rgba(var(--glass-tint),0)   100%);
+  pointer-events:none;
+  z-index:-1;
+}
+
+.rail__list{ display:flex; flex-direction:column; align-items:center; }
+
+.rail__item a{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+/* connector between consecutive numbers — 26px @1774 */
+.rail__item + .rail__item a::before{
+  content:"";
+  display:block;
+  width:1.5px;
+  height:clamp(16px,1.47vw,28px);
+  margin-block:clamp(6px,.68vw,13px);
+  border-radius:2px;
+  background:var(--hair);
+}
+
+.rail__num{
+  display:block;
+  font-size:clamp(13px,1.043vw,20px);     /* 18.5 / 1774 */
+  font-weight:600;
+  line-height:1;
+  letter-spacing:-.01em;
+  color:var(--ink-photo-faint);
+  transition:color var(--t-med) var(--ease-out),
+             font-size var(--t-med) var(--ease-out);
+}
+
+/* active marker — 52px @1774, grows out of the number */
+.rail__line{
+  display:block;
+  width:2px;
+  height:0;
+  margin-top:0;
+  border-radius:2px;
+  background:var(--yellow);
+  opacity:0;
+  transition:height .55s var(--ease-soft),
+             margin-top .55s var(--ease-soft),
+             opacity .28s var(--ease-out);
+}
+
+.rail__item:hover .rail__num{ color:var(--ink); }
+.rail__item.is-pending a{ cursor:default; }
+
+.rail__item.is-active .rail__num{
+  font-size:clamp(16px,1.353vw,26px);     /* 24 / 1774 */
+  font-weight:700;
+  color:var(--ink);
+}
+.rail__item.is-active .rail__line{
+  height:clamp(34px,2.93vw,56px);
+  margin-top:clamp(7px,.73vw,14px);
+  opacity:1;
+}
+
+
+/* ============================================================
+   SCROLL CUE
+   ============================================================ */
+
+.scroll-cue{
+  position:absolute;
+  left:0;
+  width:9.58vw;                     /* centres its column on x 85 / 1774
+                                       without a transform — [data-reveal]
+                                       owns transform on this element */
+  bottom:6.4%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:clamp(7px,.73vw,14px);
+  z-index:5;
+  color:var(--ink);
+}
+
+.scroll-cue__label{
+  font-size:clamp(10px,.73vw,14px);
+  font-weight:500;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  /* 10-11px, letter-spaced, and always directly on the photograph —
+     it needs the same weight as the eyebrows to clear AA */
+  color:var(--ink-photo-soft);
+  transition:color var(--t-fast) var(--ease-out);
+}
+.scroll-cue:hover .scroll-cue__label{ color:var(--ink); }
+
+.scroll-cue__track{
+  position:relative;
+  display:block;
+  width:1.5px;
+  height:clamp(16px,1.18vw,24px);
+  border-radius:2px;
+  background:var(--hair);
+  overflow:hidden;
+}
+.scroll-cue__dot{
+  position:absolute;
+  left:50%;
+  top:0;
+  width:4px; height:11px;
+  margin-left:-2px;
+  border-radius:3px;
+  background:var(--yellow);
+  animation:cue-travel 2.4s var(--ease-soft) infinite;
+}
+@keyframes cue-travel{
+  0%        { transform:translateY(-120%); opacity:0; }
+  22%       { opacity:1; }
+  72%       { opacity:1; }
+  100%      { transform:translateY(340%); opacity:0; }
+}
+
+.scroll-cue__arrow{
+  width:clamp(12px,.915vw,17px);
+  height:auto;
+  color:var(--ink);
+  animation:cue-bob 2.4s var(--ease-soft) infinite;
+}
+@keyframes cue-bob{
+  0%,100%   { transform:translateY(0); }
+  50%       { transform:translateY(5px); }
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+/* laptop */
+@media (max-width:1280px){
+  .hero__content{ max-width:min(56vw,700px); }
+}
+
+/* tablet — rail retires, content gets a real gutter, copy reflows */
+@media (max-width:980px){
+  .hero__inner{
+    padding-left:clamp(28px,6vw,64px);
+    padding-right:clamp(28px,6vw,64px);
+    padding-top:clamp(108px,16vh,160px);
+    padding-bottom:clamp(120px,18vh,180px);
+  }
+  .hero__content{ max-width:620px; }
+
+  .hero__eyebrow{ font-size:12px; letter-spacing:.16em; }
+  .hero__title{ margin-top:20px; font-size:clamp(42px,7.2vw,64px); }
+  .hero__lede{ margin-top:18px; font-size:17px; max-width:42ch; }
+  .hero__lede br{ display:none; }
+  .hero__cta{ margin-top:30px; }
+
+  .rail{ display:none; }
+
+  /* the photo crops tighter here, so the copy gets a soft left scrim —
+     same bright-left reading as the desktop composition */
+  .hero__media::after{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(100deg,
+      rgba(var(--glass-tint),.68) 0%,
+      rgba(var(--glass-tint),.46) 38%,
+      rgba(var(--glass-tint),.12) 68%,
+      rgba(var(--glass-tint),0)   100%);
+  }
+  .hero__img{ object-position:58% 48%; }
+
+  .scroll-cue{ left:clamp(28px,6vw,64px); width:auto; align-items:flex-start; bottom:4%; }
+  .scroll-cue__track{ margin-left:7px; }
+}
+
+/* mobile */
+@media (max-width:640px){
+  .hero{
+    align-items:flex-end;
+    background:#efece8;
+  }
+  .hero__img{
+    object-position:54% 42%;          /* keeps the room, not the empty sky */
+  }
+  /* copy sits low here, so the scrim rises from the bottom */
+  .hero__media::after{
+    background:linear-gradient(
+      180deg,
+      rgba(var(--glass-tint),0)   0%,
+      rgba(var(--glass-tint),.20) 30%,
+      rgba(var(--glass-tint),.60) 54%,
+      rgba(var(--glass-tint),.82) 78%,
+      rgba(var(--glass-tint),.88) 100%);
+  }
+  .hero__inner{
+    padding-top:clamp(100px,22vh,180px);
+    padding-bottom:124px;
+    padding-left:24px; padding-right:24px;
+  }
+  .hero__content{ max-width:none; }
+
+  .hero__eyebrow{ font-size:11px; gap:8px; }
+  .hero__title{ margin-top:16px; font-size:clamp(36px,10.4vw,50px); line-height:1.08; }
+  .hero__lede{ margin-top:14px; font-size:16px; max-width:36ch; }
+  .hero__cta{ margin-top:26px; }
+  .btn--lg{ height:52px; font-size:15px; padding-inline:24px; }
+
+  .scroll-cue{ left:24px; width:auto; bottom:26px; gap:7px; }
+  .scroll-cue__label{ font-size:10px; }
+  .scroll-cue__track{ height:18px; }
+  .scroll-cue__arrow{ width:12px; }
+}
+
+/* short landscape phones — never let the cue collide with the copy */
+@media (max-height:520px) and (max-width:980px){
+  .scroll-cue{ display:none; }
+  .hero__inner{ padding-top:96px; padding-bottom:40px; }
+}

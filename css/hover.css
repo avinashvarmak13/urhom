@@ -1,0 +1,133 @@
+/* ============================================================
+   URHOM — shared hover + focus treatment
+   One behaviour for every navigation link and interactive category
+   item: a 2px yellow underline wiping in from the left, a 2px lift
+   and a small opacity step, all on the same ~180ms curve.
+
+   Loaded last so it settles the timings the per-section sheets set
+   earlier. Hover rules sit behind @media (hover:hover) so a tap on a
+   touch device never leaves a link stuck in its hover state; focus
+   gets the identical treatment, so keyboard users see the same thing.
+   ============================================================ */
+
+:root{
+  --hov:       180ms;
+  --hov-ease:  cubic-bezier(.33,.7,.32,1);
+  --hov-lift:  -2px;
+}
+
+/* the wipe itself — shared by every target below */
+.nav__link::after,
+.shop-nav > ul > li > a::after,
+.mobile-menu__list > li > a::after,
+.navdrop__list a::after,
+.catcard__title::after,
+.ccard__title::after{
+  content:"";
+  position:absolute; left:0; bottom:-2px;
+  width:100%; height:2px;
+  border-radius:2px;
+  background:var(--yellow);
+  transform:scaleX(0);
+  transform-origin:left center;
+  transition:transform var(--hov) var(--hov-ease);
+  pointer-events:none;
+}
+
+.nav__link,
+.shop-nav > ul > li > a,
+.mobile-menu__list > li > a,
+.navdrop__list a{
+  position:relative;
+  transition:color var(--hov) var(--hov-ease),
+             opacity var(--hov) var(--hov-ease),
+             transform var(--hov) var(--hov-ease);
+}
+
+/* --- the lit state, reached by pointer or by keyboard --- */
+@media (hover:hover){
+  .nav__link:hover,
+  .shop-nav > ul > li > a:hover,
+  .mobile-menu__list > li > a:hover,
+  .navdrop__list a:hover{
+    color:var(--ink); opacity:1; transform:translateY(var(--hov-lift));
+  }
+  .nav__link:hover::after,
+  .shop-nav > ul > li > a:hover::after,
+  .mobile-menu__list > li > a:hover::after,
+  .navdrop__list a:hover::after{ transform:scaleX(1); }
+}
+
+.nav__link:focus-visible,
+.shop-nav > ul > li > a:focus-visible,
+.mobile-menu__list > li > a:focus-visible,
+.navdrop__list a:focus-visible{
+  color:var(--ink); opacity:1; transform:translateY(var(--hov-lift));
+  outline:none;                      /* the underline is the focus signal */
+}
+.nav__link:focus-visible::after,
+.shop-nav > ul > li > a:focus-visible::after,
+.mobile-menu__list > li > a:focus-visible::after,
+.navdrop__list a:focus-visible::after{ transform:scaleX(1); }
+
+/* a touch tap still reads as a press, with no stuck state afterwards */
+.nav__link:active,
+.shop-nav > ul > li > a:active,
+.mobile-menu__list > li > a:active,
+.navdrop__list a:active{ opacity:.72; }
+
+/* the current page keeps its underline whatever the pointer is doing */
+.nav__link.is-active::after,
+.shop-nav > ul > li > a.is-active::after,
+.shop-nav > ul > li > a[aria-current="page"]::after{ transform:scaleX(1); }
+
+/* the dropdown's own rows: underline sits under the word, not the row */
+.navdrop__list a{ display:inline-block; }
+.navdrop__list a::after{ left:10px; width:calc(100% - 20px); bottom:2px; }
+@media (hover:hover){
+  .navdrop__list a:hover{ background:transparent; }
+}
+.navdrop__list a:focus-visible{ background:transparent; outline:none; }
+
+
+/* ============================================================
+   INTERACTIVE CATEGORY ITEMS
+   The tile already lifts as a card; the underline goes on the title
+   so the two readings do not fight each other.
+   ============================================================ */
+
+.catcard__title,
+.ccard__title{ position:relative; display:inline-block; }
+.catcard__title::after,
+.ccard__title::after{ bottom:-3px; }
+
+@media (hover:hover){
+  .catcard:hover .catcard__title::after,
+  .ccard:hover  .ccard__title::after{ transform:scaleX(1); }
+  .catcard:hover .catcard__title,
+  .ccard:hover  .ccard__title{ transform:translateY(var(--hov-lift)); }
+}
+.catcard:focus-visible .catcard__title::after,
+.ccard:focus-visible  .ccard__title::after{ transform:scaleX(1); }
+.catcard:focus-visible .catcard__title,
+.ccard:focus-visible  .ccard__title{ transform:translateY(var(--hov-lift)); }
+
+.catcard__title,
+.ccard__title{ transition:transform var(--hov) var(--hov-ease); }
+
+/* the tile itself still needs a visible focus ring — the title underline
+   alone is too quiet for something this large */
+.catcard:focus-visible,
+.ccard:focus-visible{ outline:2px solid var(--ink); outline-offset:3px; }
+
+
+@media (prefers-reduced-motion: reduce){
+  .nav__link, .shop-nav > ul > li > a, .mobile-menu__list > li > a,
+  .navdrop__list a, .catcard__title, .ccard__title{
+    transition:color var(--hov) linear !important;
+    transform:none !important;
+  }
+  .nav__link::after, .shop-nav > ul > li > a::after,
+  .mobile-menu__list > li > a::after, .navdrop__list a::after,
+  .catcard__title::after, .ccard__title::after{ transition:none; }
+}

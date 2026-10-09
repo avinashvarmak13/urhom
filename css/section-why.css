@@ -1,0 +1,363 @@
+/* ============================================================
+   URHOM — SECTION 03 / WHY URHOM
+   Full-bleed photograph with the copy riding the bright left side.
+   Reference geometry @1774 x 887 artboard:
+     content left edge  x 155   → 8.74vw
+     eyebrow            y 168   (≈15px type)
+     headline           y 210–330, 2 lines, ≈62px / 70px leading
+     paragraph          y 368–450, 3 lines, ≈18px / 30px leading
+     benefit icons      Ø 68, row starts y 490
+     stats panel        152 → 725, y 693–807  (573 x 114)
+   Tokens, buttons and the reveal system come from base.css.
+   ============================================================ */
+
+.why{
+  position:relative;
+  min-height:100vh;
+  min-height:100svh;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+  background:#EFEAE3;
+  isolation:isolate;
+}
+
+/* ---------------- media ---------------- */
+
+.why__media{
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  overflow:hidden;
+}
+.why__media-inner{
+  position:absolute;
+  inset:0;
+  will-change:transform;
+}
+.why__img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:50% 50%;
+  transform:scale(1.04);            /* headroom for the parallax travel */
+  transform-origin:50% 50%;
+}
+
+/* entrance: a slow settle, matching the hero's language */
+.js .why__img{
+  transform:scale(1.11);
+  transition:transform 1.5s var(--ease-soft);
+}
+.js .why.is-ready .why__img{ transform:scale(1.04); }
+
+/* the photograph's left is already bright — this only takes the edge off */
+.why__media::after{
+  content:"";
+  position:absolute; inset:0;
+  background:linear-gradient(97deg,
+    rgba(var(--glass-tint),.82) 0%,
+    rgba(var(--glass-tint),.72) 24%,
+    rgba(var(--glass-tint),.56) 42%,
+    rgba(var(--glass-tint),.22) 55%,
+    rgba(var(--glass-tint),.07) 68%,
+    rgba(var(--glass-tint),0)   80%);
+}
+
+/* ---------------- layout ---------------- */
+
+.why__inner{
+  width:100%;
+  padding-left:var(--gutter-wide);        /* shared with 05 and 06 */
+  padding-right:clamp(24px,6vw,96px);
+  padding-top:clamp(88px,5.5vw,106px);
+  padding-bottom:clamp(44px,2.5vw,54px);
+}
+
+.why__eyebrow{
+  font-size:clamp(10.5px,.846vw,16px);
+  font-weight:600;
+  letter-spacing:.17em;
+  text-transform:uppercase;
+  color:var(--ink-photo-soft);
+}
+
+.why__title{
+  margin-top:clamp(12px,1.35vw,26px);
+  font-size:clamp(34px,3.5vw,66px);       /* 62 / 1774 */
+  font-weight:600;
+  line-height:1.09;                       /* 70 / 62 */
+  letter-spacing:-.03em;
+  color:var(--ink);
+}
+.why__title em{ font-style:normal; color:var(--yellow); }
+
+.why__lede{
+  margin-top:clamp(14px,1.18vw,24px);
+  font-size:clamp(14.5px,1.015vw,20px);   /* 18 / 1774 */
+  font-weight:400;
+  line-height:1.6;
+  letter-spacing:-.004em;
+  color:var(--ink-photo);
+  max-width:40ch;
+}
+
+
+/* ============================================================
+   BENEFITS
+   ============================================================ */
+
+.benefits{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:0;
+  margin-top:clamp(28px,2.0vw,38px);
+  /* was 53vw "to keep the row on the bright side" — the panel supplies its own
+     ground now, so the cap only has to preserve the original column width
+     against the padding the panel adds. */
+  max-width:56vw;
+
+  /* One translucent surface behind all four, same recipe as the stats panel
+     below it. 12-15px copy over leaf texture stays uncomfortable even when the
+     contrast ratio passes, because the backdrop churns pixel to pixel — the
+     blur is doing as much work here as the tint. */
+  padding:clamp(18px,1.5vw,30px) clamp(8px,.9vw,18px) clamp(20px,1.6vw,32px);
+  border-radius:var(--glass-radius);
+  background:var(--glass);
+  border:1px solid var(--glass-edge);
+  -webkit-backdrop-filter:var(--glass-blur);
+  backdrop-filter:var(--glass-blur);
+  box-shadow:var(--glass-shadow);
+}
+
+.benefit{
+  position:relative;
+  padding-inline:clamp(10px,1.0vw,20px);
+}
+
+/* hairline dividers between the columns */
+.benefit + .benefit::before{
+  content:"";
+  position:absolute;
+  left:0; top:clamp(44px,4.2vw,76px); bottom:4px;
+  width:1px;
+  background:rgba(24,22,18,.16);
+}
+
+.benefit__icon{
+  display:grid;
+  place-items:center;
+  width:clamp(44px,3.83vw,74px);          /* 68 / 1774 */
+  aspect-ratio:1;
+  border-radius:50%;
+  background:var(--yellow);
+  color:var(--ink);
+  box-shadow:0 4px 14px -6px rgba(140,100,0,.45);
+  transition:transform var(--t-med) var(--ease-soft);
+}
+.benefit__icon svg{ width:52%; height:52%; }
+.benefit:hover .benefit__icon{ transform:translateY(-3px) scale(1.05); }
+
+.benefit__title{
+  margin-top:clamp(12px,.9vw,18px);
+  font-size:clamp(14px,.99vw,19px);
+  font-weight:600;
+  line-height:1.25;
+  letter-spacing:-.012em;
+  color:var(--ink);
+}
+
+.benefit__desc{
+  margin-top:clamp(6px,.5vw,10px);
+  font-size:clamp(12.5px,.874vw,17px);
+  font-weight:400;
+  line-height:1.45;
+  letter-spacing:-.002em;
+  color:var(--ink-photo);
+}
+
+
+/* ============================================================
+   STATS PANEL
+   ============================================================ */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  align-items:center;
+  width:min(32.3vw,620px);                /* 573 / 1774 */
+  margin-top:clamp(24px,1.6vw,32px);
+  padding:clamp(16px,1.3vw,26px) clamp(10px,1.1vw,22px);
+  border-radius:clamp(20px,1.75vw,34px);
+  background:var(--glass-soft);
+  border:1px solid var(--glass-edge);
+  -webkit-backdrop-filter:var(--glass-blur);
+  backdrop-filter:var(--glass-blur);
+  box-shadow:var(--glass-shadow);
+}
+
+.stat{
+  position:relative;
+  padding-inline:clamp(12px,1.3vw,26px);
+  text-align:left;
+}
+.stat + .stat::before{
+  content:"";
+  position:absolute;
+  left:0; top:6%; bottom:6%;
+  width:1px;
+  background:rgba(24,22,18,.14);
+}
+
+.stat__num{
+  display:block;
+  font-size:clamp(22px,1.92vw,38px);
+  font-weight:700;
+  line-height:1.1;
+  letter-spacing:-.03em;
+  color:var(--ink);
+}
+.stat__label{
+  display:block;
+  margin-top:clamp(3px,.34vw,8px);
+  font-size:clamp(11.5px,.846vw,16px);
+  font-weight:400;
+  letter-spacing:-.002em;
+  color:var(--ink-mute);
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width:1440px){
+  /* `max-width:none` here let the row stretch to ~94vw, which pushed columns 3
+     and 4 off the scrim and onto the dark right half of the photo (they
+     measured 4.2:1 and 3.4:1). Cap it so the row stays on the bright side —
+     the same intent as the 53vw cap on the desktop rule — and carry the scrim
+     a little further right to meet it. */
+  .benefits{ max-width:min(62vw,860px); }
+  .benefit{ padding-inline:clamp(10px,.9vw,18px); }
+  .stats{ width:min(54vw,620px); }
+
+  .why__media::after{
+    background:
+      radial-gradient(64% 40% at 20% 76%,
+        rgba(var(--glass-tint),.30) 0%,
+        rgba(var(--glass-tint),.20) 46%,
+        rgba(var(--glass-tint),.06) 74%,
+        rgba(var(--glass-tint),0)   92%),
+      linear-gradient(97deg,
+        rgba(var(--glass-tint),.82) 0%,
+        rgba(var(--glass-tint),.72) 24%,
+        rgba(var(--glass-tint),.58) 42%,
+        rgba(var(--glass-tint),.32) 56%,
+        rgba(var(--glass-tint),.18) 68%,
+        rgba(var(--glass-tint),.05) 78%,
+        rgba(var(--glass-tint),0)   88%);
+  }
+}
+
+/* laptop — the four columns need more air than the photo leaves them */
+@media (max-width:1180px){
+  .why{ min-height:0; }
+  .why__inner{
+    padding-inline:clamp(28px,6vw,64px);
+    padding-top:clamp(108px,13vw,150px);
+    padding-bottom:clamp(72px,9vw,110px);
+  }
+  .why__media::after{
+    background:linear-gradient(103deg,
+      rgba(var(--glass-tint),.80) 0%,
+      rgba(var(--glass-tint),.70) 30%,
+      rgba(var(--glass-tint),.56) 56%,
+      rgba(var(--glass-tint),.36) 78%,
+      rgba(var(--glass-tint),.18) 100%);
+  }
+  .why__img{ object-position:62% 50%; }
+
+  .why__eyebrow{ font-size:12px; letter-spacing:.16em; }
+  .why__title{ margin-top:18px; font-size:clamp(36px,5.6vw,54px); }
+  .why__lede{ font-size:17px; max-width:52ch; }
+  .why__lede br{ display:none; }
+
+  .benefits{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:clamp(24px,3.6vw,42px) 0;
+    max-width:660px;
+  }
+  .benefit{ padding-inline:clamp(14px,2.4vw,28px); }
+  .benefits{ padding-inline:clamp(14px,1.8vw,26px); }
+  .benefit + .benefit::before{ display:none; }
+  .benefit:nth-child(even)::before{
+    content:"";
+    display:block;
+    position:absolute;
+    left:0; top:0; bottom:4px;
+    width:1px;
+    background:rgba(24,22,18,.16);
+  }
+
+  .stats{ width:min(100%,560px); }
+}
+
+/* mobile — vertical flow, nothing cramped */
+@media (max-width:760px){
+  /* the photo behind the glass panel is darker at this crop than on desktop */
+  .stats{ background:var(--glass); }
+
+  .why__inner{
+    padding-inline:24px;
+    padding-top:clamp(104px,20vh,170px);
+    padding-bottom:72px;
+  }
+  .why__img{ object-position:70% 46%; }
+  .why__media::after{
+    background:linear-gradient(180deg,
+      rgba(var(--glass-tint),.90) 0%,
+      rgba(var(--glass-tint),.84) 46%,
+      rgba(var(--glass-tint),.66) 74%,
+      rgba(var(--glass-tint),.52) 100%);
+  }
+
+  .why__eyebrow{ font-size:11px; }
+  .why__title{ margin-top:14px; font-size:clamp(31px,8.8vw,44px); line-height:1.08; }
+  .why__lede{ margin-top:14px; font-size:16px; max-width:38ch; }
+
+  .benefits{
+    grid-template-columns:1fr;
+    gap:26px;
+    margin-top:34px;
+  }
+  .benefit,
+  .benefit:nth-child(odd){ padding-inline:0; }
+  .benefits{ padding:24px 22px 26px; }
+  .benefit:nth-child(even)::before{ display:none; }
+  .benefit + .benefit{
+    padding-top:26px;
+    border-top:1px solid rgba(24,22,18,.14);
+  }
+  .benefit__icon{ width:52px; }
+  .benefit__title{ margin-top:14px; font-size:16px; }
+  .benefit__desc{ font-size:14.5px; max-width:34ch; }
+
+  .stats{
+    width:100%;
+    margin-top:34px;
+    padding:20px 4px;
+    border-radius:24px;
+  }
+  .stat{ padding-inline:14px; }
+  .stat__num{ font-size:23px; }
+  .stat__label{ font-size:12.5px; }
+}
+
+@media (max-width:380px){
+  .stats{ grid-template-columns:1fr; gap:16px; padding:22px; }
+  .stat{ padding-inline:0; }
+  .stat + .stat::before{
+    left:0; right:0; top:-8px; bottom:auto;
+    width:auto; height:1px;
+  }
+}

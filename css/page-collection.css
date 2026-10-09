@@ -1,0 +1,327 @@
+/* ============================================================
+   URHOM — shared collection-page additions
+   Loaded AFTER css/page-furnishing.css, which carries the collection
+   shell itself (header, hero, category strip, filters, grid). This
+   sheet holds what furniture.html and interiors.html both add on top:
+   the panoramic hero crop, the strikethrough MRP, the "New" flag and
+   the wishlist drawer.
+   ============================================================ */
+
+/* ---------------- hero ---------------- */
+
+/* these plates are ~7.2:1 — far wider than the 3:1 the furnishing hero uses,
+   so centre the crop rather than riding low the way that one does */
+.fhero--pano .fhero__media img{ object-position:50% 50%; }
+
+/* a single supplied panorama: no slide chrome, so the copy owns the band */
+.fhero--pano .fhero__inner{ align-items:center; }
+
+
+/* ---------------- product card additions ---------------- */
+
+/* .pc__price is display:block in the shared sheet; pair it with the MRP on
+   one baseline instead of stacking them */
+.pc__left{ display:flex; flex-direction:column; gap:5px; }
+.pc__left .pc__price{ display:inline; }
+.pc__priceline{ display:flex; align-items:baseline; gap:7px; flex-wrap:wrap; }
+.pc__mrp{
+  font-size:clamp(10.5px,.78vw,13px);
+  font-weight:500;
+  color:#9A958C;
+  text-decoration-thickness:1px;
+}
+.pc__left .pc__sw{ margin-top:0; }
+
+.pc__tag{
+  position:absolute; top:8px; left:8px; z-index:1;
+  padding:3px 9px; border-radius:999px;
+  background:#fff; color:var(--ink);
+  font-size:clamp(9.5px,.7vw,11.5px); font-weight:700; letter-spacing:.01em;
+  box-shadow:0 2px 8px -3px rgba(40,32,18,.32);
+}
+
+
+/* ---------------- wishlist drawer ---------------- */
+
+.shop-actions{ position:relative; }
+
+.wishpop{
+  position:absolute; top:calc(100% + 12px); right:0; z-index:70;
+  width:min(320px,calc(100vw - 32px));
+  padding:14px 14px 16px;
+  background:#fff;
+  border:1px solid #ECE8E1;
+  border-radius:16px;
+  box-shadow:0 22px 48px -24px rgba(40,32,18,.42);
+}
+.wishpop[hidden]{ display:none; }
+
+.wishpop__head{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.wishpop__head h2{ font-size:15px; font-weight:700; letter-spacing:-.015em; color:var(--ink); }
+.wishpop__x{
+  display:grid; place-items:center; width:26px; height:26px; border-radius:50%;
+  color:var(--ink-mute);
+  transition:background var(--t-fast) var(--ease-out), color var(--t-fast) var(--ease-out);
+}
+.wishpop__x:hover{ background:#F4F1EB; color:var(--ink); }
+.wishpop__x svg{ width:15px; height:15px; }
+
+.wishpop__list{ margin-top:10px; max-height:46vh; overflow-y:auto; }
+.wishpop__empty{
+  margin-top:10px; font-size:12.5px; line-height:1.5; color:var(--ink-mute);
+}
+.wishpop__empty[hidden]{ display:none; }
+
+.wishrow{
+  display:flex; align-items:center; gap:10px;
+  padding:8px 0;
+  border-top:1px solid #F2EEE7;
+}
+.wishrow:first-child{ border-top:0; }
+.wishrow__img{
+  flex:0 0 auto; width:56px; height:38px; object-fit:cover; border-radius:8px; background:#F2EEE7;
+}
+.wishrow__text{ flex:1 1 auto; min-width:0; }
+.wishrow__name{
+  display:block; font-size:12.5px; font-weight:600; letter-spacing:-.012em; color:var(--ink);
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.wishrow__price{ display:block; margin-top:2px; font-size:12px; font-weight:600; color:var(--ink-soft); }
+.wishrow__x{
+  flex:0 0 auto; display:grid; place-items:center; width:24px; height:24px; border-radius:50%;
+  color:var(--ink-mute);
+  transition:background var(--t-fast) var(--ease-out), color var(--t-fast) var(--ease-out);
+}
+.wishrow__x:hover{ background:#F4F1EB; color:var(--ink); }
+.wishrow__x svg{ width:13px; height:13px; }
+
+@media (max-width:480px){
+  .wishpop{ right:auto; left:0; width:calc(100vw - 32px); }
+}
+
+
+/* ============================================================
+   WIDE CATEGORY STRIP — horizontal scroller
+   Furnishing and Furniture fit eight tiles across. Interiors has
+   fourteen, and shrinking them to fit made a visibly different strip.
+   So the tile keeps exactly the width it has on the other two pages
+   — one eighth of the row, same gaps, same body — and the row scrolls
+   sideways instead. The card styling itself is inherited untouched.
+   ============================================================ */
+
+.catstrip--wide{
+  --cs-gap: clamp(8px,.85vw,14px);
+  --cs-per: 8;                      /* tiles per screenful, per breakpoint */
+
+  display:flex;
+  overflow-x:auto;
+  overscroll-behavior-x:contain;
+  scroll-behavior:smooth;
+  /* keeps a tile scrolled to by keyboard clear of the row's own padding */
+  scroll-padding-inline:clamp(16px,2.08vw,34px);
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.catstrip--wide::-webkit-scrollbar{ display:none; }
+
+.catstrip--wide .catcard{
+  /* the same arithmetic the 8-column grid does: the row's content box
+     minus the gaps between the visible tiles, divided by that count */
+  flex:0 0 calc((100% - (var(--cs-per) - 1) * var(--cs-gap)) / var(--cs-per));
+}
+/* a lift on hover inside a scroller would clip against the overflow edge */
+.catstrip--wide .catcard:hover{ transform:none; }
+
+/* track the shared sheet's own breakpoints so the tile stays the same size
+   as it is on the furnishing and furniture strips at every width */
+@media (max-width:1280px){ .catstrip--wide{ --cs-per:4; } }
+@media (max-width:720px) { .catstrip--wide{ --cs-per:2; } }
+@media (max-width:480px) { .catstrip--wide{ --cs-per:2; --cs-gap:8px; } }
+
+@media (prefers-reduced-motion: reduce){
+  .catstrip--wide{ scroll-behavior:auto; }
+}
+
+
+/* ============================================================
+   FILTER RAIL — closed by default
+   The rail used to render every option at once, which on Interiors
+   meant 14 categories plus five facet lists on first paint. Groups
+   are now closed disclosures with a count badge, long lists carry a
+   lookup box, and whatever is applied is restated as chips above the
+   grid so nothing is hidden by being collapsed.
+   ============================================================ */
+
+.fgroup__n{
+  margin-left:auto; margin-right:2px;
+  min-width:17px; height:17px; padding:0 4px;
+  display:grid; place-items:center;
+  border-radius:999px; background:var(--yellow); color:var(--ink);
+  font-size:10px; font-weight:800; line-height:1;
+}
+.fgroup__n[hidden]{ display:none; }
+
+.flookup{ margin-bottom:9px; }
+.flookup input{
+  width:100%; height:30px; padding:0 10px;
+  font:inherit; font-size:12px; color:var(--ink);
+  background:#F7F5F1; border:1px solid #E8E3DB; border-radius:8px;
+}
+.flookup input::placeholder{ color:#9A9792; }
+.flookup input:focus{ outline:none; background:#fff; border-color:var(--yellow); }
+
+/* a long list scrolls inside the group rather than pushing the rail down */
+.fgroup__body .checks{ max-height:208px; overflow-y:auto; padding-right:2px; }
+.fnone{ margin-top:7px; font-size:11.5px; color:var(--ink-mute); }
+.fnone[hidden]{ display:none; }
+
+
+/* ============================================================
+   ACTIVE FILTER CHIPS + GRID FILL
+   The chips used to carry a "Filtering by" preamble and an oversized
+   cross; the row now reads as a line of compact removable tokens. The
+   grid became responsive so a filtered result fills the column instead
+   of leaving a fixed four-track frame half empty.
+   ============================================================ */
+
+.chips{
+  display:flex; align-items:center; flex-wrap:wrap; gap:6px;
+  margin-bottom:clamp(10px,.9vw,16px);
+}
+.chips[hidden]{ display:none; }
+.chip{
+  display:inline-flex; align-items:center; gap:7px;
+  height:28px; padding:0 8px 0 11px; border-radius:999px;
+  background:#F7F5F0; border:1px solid #ECE7DE; color:var(--ink);
+  font-size:12.5px; font-weight:500; letter-spacing:-.008em; line-height:1;
+  transition:background .15s var(--ease-out), border-color .15s var(--ease-out);
+}
+.chip:hover{ background:#F1ECE3; border-color:#E0D9CC; }
+.chip:focus-visible{ outline:2px solid var(--ink); outline-offset:2px; }
+.chip svg{ width:9px; height:9px; color:#8F8C85; flex:0 0 auto; }
+.chip:hover svg{ color:var(--ink); }
+.chip--all{
+  background:none; border-color:transparent; color:var(--ink-mute);
+  padding-inline:8px; font-weight:600; text-decoration:underline;
+  text-underline-offset:3px; text-decoration-color:#D9D3C7;
+}
+.chip--all:hover{ background:none; color:var(--ink); text-decoration-color:currentColor; }
+
+
+/* ---------------- grid ---------------- */
+
+/* was repeat(4,…) at every width above 1280, so two results sat in a
+   four-track row with half the column blank. auto-fill tracks the width
+   it actually has, and the card keeps a steady size either way. */
+/* With the sidebar gone the row is wider, so the floor rises to keep the
+   card at the size it has always been rather than fitting six to a row. */
+:where(.shop-page) .grid:not(.is-list){
+  grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr));
+  align-content:start;
+}
+@media (max-width:620px){
+  /* grid = two columns, list = one. These used to override .is-list because
+     they loaded after page-furnishing.css and matched on class count alone. */
+  :where(.shop-page) .grid:not(.is-list){ grid-template-columns:1fr 1fr; }
+}
+/* the selected mode wins at every width, and survives sort/filter re-renders */
+.shop-page .grid.is-list{ grid-template-columns:1fr !important; }
+.shop-page .grid[hidden]{ display:none; }
+
+/* a card's footer sits on the baseline of its row even when one title
+   wraps to two lines and its neighbour does not */
+.pc__body{ flex:1 1 auto; }
+.pc__foot{ margin-top:auto; padding-top:2px; }
+
+/* empty state */
+.shop-page .empty{
+  padding:clamp(40px,5vw,72px) 20px;
+  border:1px dashed #E6E0D4; border-radius:14px;
+  background:#FCFBF8;
+  font-size:14px; line-height:1.6; color:#6E6C66;
+}
+.shop-page .empty button{
+  display:inline-block; margin-top:4px;
+  color:var(--ink); font-weight:600; text-decoration:underline; text-underline-offset:3px;
+}
+
+
+/* ============================================================
+   FILTERS AS A PANEL
+   The rail used to be a permanent second column. It is now one
+   button beside the toolbar controls, opening a compact white panel
+   of closed accordion groups. Sorting and the grid/list toggle stay
+   where they were, as separate controls.
+   ============================================================ */
+
+/* the two-column shop grid is gone — the listing takes the full width */
+.shop-page .shop{ display:block; }
+
+.filterbox{ position:relative; }
+
+.filterbtn{
+  display:inline-flex; align-items:center; gap:7px;
+  height:clamp(32px,2.4vw,38px); padding:0 13px;
+  border:1px solid #E4DFD5; border-radius:999px;
+  background:#fff; color:var(--ink);
+  font-size:clamp(12px,.85vw,13.5px); font-weight:600; letter-spacing:-.01em;
+  transition:border-color .18s var(--ease-out), background .18s var(--ease-out);
+}
+.filterbtn:hover{ border-color:#D4CCBC; background:#FCFBF8; }
+.filterbtn:focus-visible{ outline:2px solid var(--ink); outline-offset:2px; }
+.filterbtn svg{ width:15px; height:15px; }
+.filterbtn[aria-expanded="true"]{ border-color:var(--ink); }
+.filterbtn__n{
+  min-width:17px; height:17px; padding:0 5px;
+  display:grid; place-items:center;
+  border-radius:999px; background:var(--yellow); color:var(--ink);
+  font-size:10px; font-weight:800; line-height:1;
+}
+.filterbtn__n[hidden]{ display:none; }
+
+/* --- the panel --- */
+.shop-page .filters{
+  position:absolute; z-index:50;
+  top:calc(100% + 9px); left:0;
+  width:min(304px,calc(100vw - 32px));
+  max-height:min(72vh,560px);
+  display:flex; flex-direction:column;
+  padding:14px 14px 0;
+  background:#fff;
+  border:1px solid #EAE5DC; border-radius:14px;
+  box-shadow:0 22px 52px -28px rgba(34,27,14,.4);
+}
+.shop-page .filters[hidden]{ display:none; }
+.shop-page .filters .fgroups{ overflow-y:auto; overscroll-behavior:contain; margin:0 -2px; padding:0 2px; }
+
+.filters__title{ font-size:14px; font-weight:700; letter-spacing:-.015em; }
+.filters__foot{
+  position:sticky; bottom:0;
+  margin:0 -14px; padding:10px 14px 12px;
+  background:#fff; border-top:1px solid #F2EEE6;
+}
+.filters__done{
+  width:100%; height:38px; border-radius:10px;
+  background:var(--yellow); color:var(--ink);
+  font-size:13px; font-weight:700; letter-spacing:-.01em;
+  transition:filter .18s var(--ease-out);
+}
+.filters__done:hover{ filter:brightness(1.05); }
+.filters__done:focus-visible{ outline:2px solid var(--ink); outline-offset:2px; }
+
+/* the toolbar now carries three controls, so let it wrap rather than squeeze */
+.shop-page .toolbar__ctl{ flex-wrap:wrap; }
+
+/* --- mobile: the panel becomes a full-width sheet under the button --- */
+@media (max-width:560px){
+  .shop-page .filters{
+    position:fixed; left:12px; right:12px; top:auto; bottom:12px;
+    width:auto; max-height:72vh;
+    border-radius:16px;
+    box-shadow:0 -10px 60px -20px rgba(34,27,14,.5);
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .filterbtn, .filters__done{ transition:none; }
+}
